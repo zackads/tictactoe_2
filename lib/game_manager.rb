@@ -1,9 +1,13 @@
 class GameManager
-  def grid
-    [
+  def initialize
+    @grid =     [
       [nil, nil, nil],
       [nil, nil, nil],
       [nil, nil, nil]
     ]
   end
+  
+  def grid
+    @grid
+  end 
 end
