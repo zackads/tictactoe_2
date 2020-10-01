@@ -15,5 +15,19 @@ RSpec.describe 'the class-based user interface' do
                                 ])
       end
     end
+
+    context 'when an empty grid is displayed' do
+      it 'current player can make a move' do
+        # Arrange
+        game = GameManager.new
+
+        # Assert
+        expect(game.make_move("A1")).to eq([
+                                  ["X", nil, nil],
+                                  [nil, nil, nil],
+                                  [nil, nil, nil]
+                                ])
+      end
+    end
   end
 end

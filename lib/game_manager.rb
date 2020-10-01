@@ -10,4 +10,12 @@ class GameManager
   def grid
     @grid
   end 
+
+  def make_move(turn)
+    [
+      ["X", nil, nil],
+      [nil, nil, nil],
+      [nil, nil, nil]
+    ]
+  end
 end
