@@ -10,5 +10,8 @@ class GameManager
   def grid
     @grid
   end 
+
+  def make_move
+  end
 end
 
