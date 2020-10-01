@@ -1,19 +1,24 @@
-# Ruby kata boilerplate
+# Tic Tac Toe v2
 
-Basic Ruby project directory with bundle and RSpec. Suitable for solving katas using TDD.
+https://learn.madetech.com/sparring/tic-tac-toe/
 
-## Setup
+This is an exercise in Software Design and Changing Requirements. Don’t peek ahead at the later steps of this challenge, as part of the point of this is to deal with changing requirements.
 
-1.  `git clone https://github.com/zackads/ruby_kata_boilerplate.git`
+## Requirements
 
-2.  `bundle install`
+Using the discipline of TDD, build a game of tic tac toe.
 
-3.  Tests -> `spec/ruby_boilerplate_spec.rb`
+- The game should allow a human to play against an AI.
+- The AI should be unbeatable.
+- The game should have a user interface of some kind.
 
-4.  Production code -> `lib/ruby_boilerplate.rb`
+## Rules
 
-## Useful resources
+- The game is played on a 3x3 grid.
+- You are X, your opponent is O. Players take turns putting their marks in empty squares.
+- The first player to get 3 of their marks in a row (up, down, across, or diagonally) is the winner.
+- If all 9 squares are full and no player has 3 marks in a row, the game is over.
 
-[RSpec Style Guide](https://github.com/rubocop-hq/rspec-style-guide)
-[Bundler](https://bundler.io/)
-[Rspec](https://rspec.info/)
+## Next
+
+Once you have implemented all the rules here, and are happy with your system’s design go here
