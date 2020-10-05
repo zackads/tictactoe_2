@@ -15,6 +15,8 @@ class Grid
   def record_move(player_name, string_coordinates)
     coords = move_coords(string_coordinates)
 
+    raise ArgumentError, 'Invalid move: square already contains a piece' unless @grid[coords[0]][coords[1]].nil?
+
     @grid[coords[0]][coords[1]] = player_name
   end
 

@@ -16,23 +16,32 @@ RSpec.describe 'the class-based user interface' do
       end
     end
 
-    context 'when a new game is started' do
-      it 'records moves from players' do
-        # Arrange
-        game = GameManager.new
+    it 'records moves from players' do
+      # Arrange
+      game = GameManager.new
 
-        # Act
-        game.make_move('A3') # X
-        game.make_move('B2') # O
-        game.make_move('A1') # X
+      # Act
+      game.make_move('A3') # X
+      game.make_move('B2') # O
+      game.make_move('A1') # X
 
-        # Assert
-        expect(game.grid).to eq([
-                                  ['X', nil, nil], # 3
-                                  [nil, 'O', nil], # 2
-                                  ['X', nil, nil]  # 1
-                                ]) # A    B    C
-      end
+      # Assert
+      expect(game.grid).to eq([
+                                ['X', nil, nil], # 3
+                                [nil, 'O', nil], # 2
+                                ['X', nil, nil]  # 1
+                              ]) # A    B    C
+    end
+
+    it 'does not permit more than one move per square' do
+      # Arrange
+      game = GameManager.new
+
+      # Act
+      game.make_move('A3') # X
+
+      # Assert
+      expect { game.make_move('A3') }.to raise_error(ArgumentError)
     end
   end
 end
