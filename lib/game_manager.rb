@@ -1,17 +1,20 @@
 class GameManager
   def initialize
-    @grid =     [
+    @grid = [
       [nil, nil, nil],
       [nil, nil, nil],
       [nil, nil, nil]
     ]
   end
-  
-  def grid
-    @grid
-  end 
 
-  def make_move
+  attr_reader :grid
+
+  def make_move(_move)
+    @grid = [
+      ['X', nil, nil],
+      [nil, nil, nil],
+      [nil, nil, nil]
+    ]
   end
 end
 

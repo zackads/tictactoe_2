@@ -16,18 +16,23 @@ RSpec.describe 'the class-based user interface' do
       end
     end
 
-    # context 'when a new game is started' do
-    #   it 'records moves from players' do
-    #     # Arrange
-    #     game = GameManager.new
+    context 'when a new game is started' do
+      it 'records moves from players' do
+        # Arrange
+        game = GameManager.new
 
-    #     # Assert
-    #     expect(game.current_game_state).to eq([
-    #                               ["X", nil, nil],
-    #                               [nil, "O", nil], 
-    #                               ["X", nil, nil]
-    #                             ])
-    #   end
-    # end
+        # Act
+        game.make_move('A3') # X
+        game.make_move('B2') # O
+        game.make_move('A1') # X
+
+        # Assert
+        expect(game.grid).to eq([
+                                  ['X', nil, nil], # 3
+                                  [nil, 'O', nil], # 2
+                                  ['X', nil, nil]  # 1
+                                ]) # A    B    C
+      end
+    end
   end
 end
