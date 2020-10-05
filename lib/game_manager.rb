@@ -1,20 +1,25 @@
 class GameManager
+  attr_reader :grid
+
   def initialize
     @grid = [
       [nil, nil, nil],
       [nil, nil, nil],
       [nil, nil, nil]
     ]
+    @current_player = 'X'
   end
 
-  attr_reader :grid
+  def make_move(move)
+    update_grid(move)
 
-  def make_move(_move)
-    @grid = [
-      ['X', nil, nil],
-      [nil, nil, nil],
-      [nil, nil, nil]
-    ]
+    change_current_player
+  end
+
+  private
+
+  def change_current_player
+    @current_player = @current_player == 'X' ? 'O' : 'X'
   end
 end
 

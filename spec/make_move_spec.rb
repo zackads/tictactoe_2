@@ -18,6 +18,22 @@ RSpec.describe 'the class-based user interface' do
         )
       end
     end
+
+    it 'records that move in the correct position in the grid' do
+      # Arrange
+      game = GameManager.new
+
+      # Act
+      game.make_move('A3')
+      game.make_move('B2')
+
+      # Assert
+      expect(game.grid).to eq(
+        [['X', nil, nil],
+         [nil, 'O', nil],
+         [nil, nil, nil]]
+      )
+    end
   end
 end
 
