@@ -1,6 +1,8 @@
 require 'grid'
 
 class GameManager
+  attr_reader :grid
+
   def initialize
     @grid = Grid.new
     @current_player = 'X'
