@@ -43,5 +43,13 @@ RSpec.describe 'the class-based user interface' do
       # Assert
       expect { game.make_move('A3') }.to raise_error(ArgumentError)
     end
+
+    it 'does not accept off grid coordinates' do
+      # Arrange
+      game = GameManager.new
+
+      # Assert
+      expect { game.make_move('A4') }.to raise_error(ArgumentError)
+    end
   end
 end

@@ -32,6 +32,8 @@ class Grid
       '3' => 0
     }
 
+    raise ArgumentError, 'Invalid move: move out of range' unless index_lookup.has_key?(coord[0] && coord[1])
+
     [index_lookup[coord[1]], index_lookup[coord[0]]]
   end
 end
