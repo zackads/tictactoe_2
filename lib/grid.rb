@@ -14,8 +14,6 @@ class Grid
   end
 
   def record_move(player_name, coords)
-    raise ArgumentError, 'Invalid move: square already contains a piece' unless get_cell(coords).nil?
-
     set_cell(coords, player_name)
   end
 
@@ -48,9 +46,18 @@ class Grid
 
   def set_cell(coords, marker)
     # Command: "A3" -> sets contents of "A3" to marker, e.g. 'X' or 'O'
+
+    raise ArgumentError, 'Invalid move: square already contains a piece' unless get_cell(coords).nil?
+
     row = translate_coords_to_indices(coords)[:row_index]
     col = translate_coords_to_indices(coords)[:col_index]
     @grid[row][col] = marker
+  end
+
+  def coords_valid?(coords)
+    return false unless %w[A B C].include?(coords[0]) && %w[1 2 3].include?(coords[1])
+
+    true
   end
 
   def translate_coords_to_indices(coords) # "A3"
@@ -67,3 +74,7 @@ class Grid
     { col_index: index_lookup[coords[0]], row_index: index_lookup[coords[1]] }
   end
 end
+
+# finish refactor of coords_valid? extract method
+# all invalid exceptions in one place in one file
+# record_move: array of moves to iterate over
