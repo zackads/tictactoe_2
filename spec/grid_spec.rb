@@ -46,7 +46,9 @@ RSpec.describe Grid do
       grid.record_move('X', 'A3')
 
       # Assert
-      expect { grid.record_move('X', 'A3') }.to raise_error(ArgumentError)
+      expect { grid.record_move('X', 'A3') }.to raise_error(ArgumentError) # Duplicate move
+      expect { grid.record_move('X', 'A4') }.to raise_error(ArgumentError) # Off-grid square
+      expect { grid.record_move('X', 'XYZ') }.to raise_error(ArgumentError) # Not a square
     end
   end
 end
