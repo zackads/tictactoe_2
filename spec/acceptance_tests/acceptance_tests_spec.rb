@@ -20,10 +20,9 @@ RSpec.describe 'the class-based user interface' do
         it 'records that move on the grid' do
           # Arrange
           game = GameManager.new
-          game.new_player('X')
 
           # Act
-          game.add_move('X', 'A3')
+          game.make_move('A3')
 
           # Assert
           expect(game.grid).to eq([
@@ -52,7 +51,7 @@ RSpec.describe 'the class-based user interface' do
                               ]) # A    B    C
     end
 
-    it 'does not permit more than one move per square' do
+    it 'does not invalid moves' do
       # Arrange
       game = GameManager.new
 
@@ -60,15 +59,9 @@ RSpec.describe 'the class-based user interface' do
       game.make_move('A3') # X
 
       # Assert
-      expect { game.make_move('A3') }.to raise_error(ArgumentError)
-    end
-
-    it 'does not accept off grid coordinates' do
-      # Arrange
-      game = GameManager.new
-
-      # Assert
-      expect { game.make_move('A4') }.to raise_error(ArgumentError)
+      expect { game.make_move('A3') }.to raise_error(ArgumentError) # Two moves on one square
+      expect { game.make_move('A4') }.to raise_error(ArgumentError) # Off-grid square
+      expect { game.make_move('XYZ') }.to raise_error(ArgumentError) # Not a square
     end
   end
 end
