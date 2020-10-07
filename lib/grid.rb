@@ -14,14 +14,9 @@ class Grid
   end
 
   def record_move(player_name, coords)
-    indices = translate_coords_to_indices(coords)
-    p(indices)
+    raise ArgumentError, 'Invalid move: square already contains a piece' unless get_cell(coords).nil?
 
-    unless @grid[indices[:col_index]][indices[:row_index]].nil?
-      raise ArgumentError, 'Invalid move: square already contains a piece'
-    end
-
-    @grid[indices[:col_index]][indices[:row_index]] = player_name
+    set_cell(coords, player_name)
   end
 
   def winner
@@ -43,19 +38,22 @@ class Grid
     nil
   end
 
-  # def get_cell(coords)
-  #   # Query: "A3" -> contents of "A3", e.g. "X", "O" or nil
-  #   col_index = move_coords(coords)[0]
-  #   row_index = move_coords(coords)[1]
+  def get_cell(coords)
+    # Query: "A3" -> contents of "A3", e.g. "X", "O" or nil
+    col = translate_coords_to_indices(coords)[:col_index]
+    row = translate_coords_to_indices(coords)[:row_index]
 
-  #   @grid[col_index][row_index]
-  # end
+    @grid[row][col]
+  end
 
-  # def set_cell(coords, marker)
-  #   # Command: "A3" -> sets contents of "A3" to marker, e.g. 'X' or 'O'
-  # end
+  def set_cell(coords, marker)
+    # Command: "A3" -> sets contents of "A3" to marker, e.g. 'X' or 'O'
+    row = translate_coords_to_indices(coords)[:row_index]
+    col = translate_coords_to_indices(coords)[:col_index]
+    @grid[row][col] = marker
+  end
 
-  def translate_coords_to_indices(coords)
+  def translate_coords_to_indices(coords) # "A3"
     index_lookup = {
       'A' => 0,
       'B' => 1,
@@ -66,6 +64,6 @@ class Grid
     }
     raise ArgumentError, 'Invalid move: move out of range' unless index_lookup.key?(coords[0] && coords[1])
 
-    { col_index: index_lookup[coords[1]], row_index: index_lookup[coords[0]] }
+    { col_index: index_lookup[coords[0]], row_index: index_lookup[coords[1]] }
   end
 end
