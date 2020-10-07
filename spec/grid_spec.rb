@@ -99,5 +99,100 @@ RSpec.describe Grid do
       # Assert
       expect(grid.winner).to eq('X')
     end
+
+    it 'declares O the winner' do
+      # Arrange
+      grid = Grid.new
+
+      # Act
+      grid.record_move('O', 'A2') # X
+      grid.record_move('X', 'B3') # O
+      grid.record_move('O', 'B2') # X
+      grid.record_move('X', 'C1') # O
+      grid.record_move('O', 'C2') # X - winning move
+
+      # Assert
+      expect(grid.winner).to eq('O')
+    end
+  end
+  context 'when a winning move is played on the bottom row' do
+    it 'declares X the winner' do
+      # Arrange
+      grid = Grid.new
+
+      # Act
+      grid.record_move('X', 'A1') # X
+      grid.record_move('O', 'B3') # O
+      grid.record_move('X', 'B1') # X
+      grid.record_move('O', 'C2') # O
+      grid.record_move('X', 'C1') # X - winning move
+
+      # Assert
+      expect(grid.winner).to eq('X')
+    end
+
+    it 'declares X the winner' do
+      # Arrange
+      grid = Grid.new
+
+      # Act
+      grid.record_move('O', 'A1') # X
+      grid.record_move('X', 'B3') # O
+      grid.record_move('O', 'B1') # X
+      grid.record_move('X', 'C2') # O
+      grid.record_move('O', 'C1') # X - winning move
+
+      # Assert
+      expect(grid.winner).to eq('O')
+    end
+  end
+
+  context 'when a winning move is played in the first column' do
+    it 'declares X the winner' do
+      # Arrange
+      grid = Grid.new
+
+      # Act
+      grid.record_move('X', 'A3') # X
+      grid.record_move('O', 'B2') # O
+      grid.record_move('X', 'A2') # X
+      grid.record_move('O', 'C1') # O
+      grid.record_move('X', 'A1') # X - winning move
+
+      # Assert
+      expect(grid.winner).to eq('X')
+    end
+
+    it 'declares O the winner' do
+      # Arrange
+      grid = Grid.new
+
+      # Act
+      grid.record_move('O', 'A3') # X
+      grid.record_move('X', 'B2') # O
+      grid.record_move('O', 'A2') # X
+      grid.record_move('X', 'C1') # O
+      grid.record_move('O', 'A1') # X - winning move
+
+      # Assert
+      expect(grid.winner).to eq('O')
+    end
+  end
+
+  context 'when there is no winner' do
+    xit 'does not declare a winner' do
+      # Arrange
+      grid = Grid.new
+
+      # Act
+      grid.record_move('O', 'A1') # X
+      grid.record_move('X', 'B2') # O
+      grid.record_move('O', 'A2') # X
+      grid.record_move('X', 'C1') # O
+      grid.record_move('O', 'C3') # X - winning move
+
+      # Assert
+      expect(grid.winner).to eq(nil)
+    end
   end
 end

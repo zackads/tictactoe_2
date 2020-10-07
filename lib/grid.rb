@@ -21,11 +21,21 @@ class Grid
   end
 
   def winner
-    return 'X' if @grid[0].all? { |cell| cell == 'X' }
-    return 'O' if @grid[0].all? { |cell| cell == 'O' }
+    return columns_winner if columns_winner
+    return rows_winner if rows_winner
   end
 
   private
+
+  def columns_winner
+    @grid.each { |row| return row.first if row.uniq.size <= 1 }
+    nil
+  end
+
+  def rows_winner
+    @grid.transpose.each { |row| return row.first if row.uniq.size <= 1 }
+    nil
+  end
 
   def move_coords(coord)
     index_lookup = {
