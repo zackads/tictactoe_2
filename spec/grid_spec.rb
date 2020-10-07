@@ -179,6 +179,87 @@ RSpec.describe Grid do
     end
   end
 
+  context 'when a winning move is played in the second column' do
+    it 'declares X the winner' do
+      # Arrange
+      grid = Grid.new
+
+      # Act
+      grid.record_move('X', 'B3') # X
+      grid.record_move('O', 'A2') # O
+      grid.record_move('X', 'B2') # X
+      grid.record_move('O', 'C1') # O
+      grid.record_move('X', 'B1') # X - winning move
+
+      # Assert
+      expect(grid.winner).to eq('X')
+    end
+
+    it 'declares O the winner' do
+      # Arrange
+      grid = Grid.new
+
+      # Act
+      grid.record_move('O', 'B3') # X
+      grid.record_move('X', 'A2') # O
+      grid.record_move('O', 'B2') # X
+      grid.record_move('X', 'C1') # O
+      grid.record_move('O', 'B1') # X - winning move
+
+      # Assert
+      expect(grid.winner).to eq('O')
+    end
+  end
+
+  context 'when a winning move is played in the third column' do
+    it 'declares X the winner' do
+      # Arrange
+      grid = Grid.new
+
+      # Act
+      grid.record_move('X', 'C3') # X
+      grid.record_move('O', 'A2') # O
+      grid.record_move('X', 'C2') # X
+      grid.record_move('O', 'B1') # O
+      grid.record_move('X', 'C1') # X - winning move
+
+      # Assert
+      expect(grid.winner).to eq('X')
+    end
+
+    it 'declares O the winner' do
+      # Arrange
+      grid = Grid.new
+
+      # Act
+      grid.record_move('O', 'C3') # X
+      grid.record_move('X', 'A2') # O
+      grid.record_move('O', 'C2') # X
+      grid.record_move('X', 'B1') # O
+      grid.record_move('O', 'C1') # X - winning move
+
+      # Assert
+      expect(grid.winner).to eq('O')
+    end
+  end
+
+  context 'when a winning diagonal is played' do
+    it 'declares X the winner' do
+      # Arrange
+      grid = Grid.new
+
+      # Act
+      grid.record_move('X', 'A3') # X
+      grid.record_move('O', 'A2') # O
+      grid.record_move('X', 'B2') # X
+      grid.record_move('O', 'B1') # O
+      grid.record_move('X', 'C1') # X - winning move
+
+      # Assert
+      expect(grid.winner).to eq('X')
+    end
+  end
+
   context 'when there is no winner' do
     xit 'does not declare a winner' do
       # Arrange

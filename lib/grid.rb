@@ -2,9 +2,10 @@
 class Grid
   def initialize
     @grid = [
-      [nil, nil, nil],
-      [nil, nil, nil],
-      [nil, nil, nil]
+      [nil, nil, nil], # 3
+      [nil, nil, nil], # 2
+      [nil, nil, nil]  # 1
+      # A    B    C
     ]
   end
 
@@ -12,17 +13,22 @@ class Grid
     @grid
   end
 
-  def record_move(player_name, string_coordinates)
-    coords = move_coords(string_coordinates)
+  def record_move(player_name, coords)
+    indices = translate_coords_to_indices(coords)
+    p(indices)
 
-    raise ArgumentError, 'Invalid move: square already contains a piece' unless @grid[coords[0]][coords[1]].nil?
+    unless @grid[indices[:col_index]][indices[:row_index]].nil?
+      raise ArgumentError, 'Invalid move: square already contains a piece'
+    end
 
-    @grid[coords[0]][coords[1]] = player_name
+    @grid[indices[:col_index]][indices[:row_index]] = player_name
   end
 
   def winner
     return columns_winner if columns_winner
     return rows_winner if rows_winner
+
+    return 'X' if @grid[0][0] == 'X' && @grid[1][1] == 'X' && @grid[2][2]
   end
 
   private
@@ -37,7 +43,19 @@ class Grid
     nil
   end
 
-  def move_coords(coord)
+  # def get_cell(coords)
+  #   # Query: "A3" -> contents of "A3", e.g. "X", "O" or nil
+  #   col_index = move_coords(coords)[0]
+  #   row_index = move_coords(coords)[1]
+
+  #   @grid[col_index][row_index]
+  # end
+
+  # def set_cell(coords, marker)
+  #   # Command: "A3" -> sets contents of "A3" to marker, e.g. 'X' or 'O'
+  # end
+
+  def translate_coords_to_indices(coords)
     index_lookup = {
       'A' => 0,
       'B' => 1,
@@ -46,9 +64,8 @@ class Grid
       '2' => 1,
       '3' => 0
     }
+    raise ArgumentError, 'Invalid move: move out of range' unless index_lookup.key?(coords[0] && coords[1])
 
-    raise ArgumentError, 'Invalid move: move out of range' unless index_lookup.has_key?(coord[0] && coord[1])
-
-    [index_lookup[coord[1]], index_lookup[coord[0]]]
+    { col_index: index_lookup[coords[1]], row_index: index_lookup[coords[0]] }
   end
 end
