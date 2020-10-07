@@ -52,7 +52,7 @@ RSpec.describe Grid do
     end
   end
 
-  context 'when a winning move is played' do
+  context 'when a winning move is played on the top row' do
     it 'declares X the winner' do
       # Arrange
       grid = Grid.new
@@ -81,6 +81,23 @@ RSpec.describe Grid do
 
       # Assert
       expect(grid.winner).to eq('O')
+    end
+  end
+
+  context 'when a winning move is played on the middle row' do
+    it 'declares X the winner' do
+      # Arrange
+      grid = Grid.new
+
+      # Act
+      grid.record_move('X', 'A2') # X
+      grid.record_move('O', 'B3') # O
+      grid.record_move('X', 'B2') # X
+      grid.record_move('O', 'C1') # O
+      grid.record_move('X', 'C2') # X - winning move
+
+      # Assert
+      expect(grid.winner).to eq('X')
     end
   end
 end
