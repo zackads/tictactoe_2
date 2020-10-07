@@ -63,5 +63,21 @@ RSpec.describe 'the class-based user interface' do
       expect { game.make_move('A4') }.to raise_error(ArgumentError) # Off-grid square
       expect { game.make_move('XYZ') }.to raise_error(ArgumentError) # Not a square
     end
+
+    it 'declares a winner' do
+      # Arrange
+      game = GameManager.new
+
+      # Act
+      game.make_move('A3') # X
+      game.make_move('B2') # O
+      game.make_move('B3') # X
+      game.make_move('C1') # O
+      game.make_move('C3') # X - winning move
+
+      # Assert
+      expect(game.over?).to eq(true)
+      expect(game.winner).to eq('X')
+    end
   end
 end

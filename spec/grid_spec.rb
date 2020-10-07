@@ -51,4 +51,36 @@ RSpec.describe Grid do
       expect { grid.record_move('X', 'XYZ') }.to raise_error(ArgumentError) # Not a square
     end
   end
+
+  context 'when a winning move is played' do
+    it 'declares X the winner' do
+      # Arrange
+      grid = Grid.new
+
+      # Act
+      grid.record_move('X', 'A3') # X
+      grid.record_move('O', 'B2') # O
+      grid.record_move('X', 'B3') # X
+      grid.record_move('O', 'C1') # O
+      grid.record_move('X', 'C3') # X - winning move
+
+      # Assert
+      expect(grid.winner).to eq('X')
+    end
+
+    it 'declares O the winner' do
+      # Arrange
+      grid = Grid.new
+
+      # Act
+      grid.record_move('O', 'A3') # X
+      grid.record_move('X', 'B1') # O
+      grid.record_move('O', 'B3') # X
+      grid.record_move('X', 'C1') # O
+      grid.record_move('O', 'C3') # X - winning move
+
+      # Assert
+      expect(grid.winner).to eq('O')
+    end
+  end
 end

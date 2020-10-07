@@ -20,6 +20,11 @@ class Grid
     @grid[coords[0]][coords[1]] = player_name
   end
 
+  def winner
+    return 'X' if @grid[0].all? { |cell| cell == 'X' }
+    return 'O' if @grid[0].all? { |cell| cell == 'O' }
+  end
+
   private
 
   def move_coords(coord)
