@@ -30,6 +30,7 @@ class Grid
     return rows_winner if rows_winner
 
     return 'X' if @grid[0][0] == 'X' && @grid[1][1] == 'X' && @grid[2][2]
+    return 'X' if @grid[0][2] == 'X' && @grid[1][1] == 'X' && @grid[2][0]
   end
 
   private

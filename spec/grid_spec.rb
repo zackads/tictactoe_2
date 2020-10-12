@@ -202,7 +202,7 @@ RSpec.describe Grid do
     end
   end
 
-  context 'when a winning diagonal is played' do
+  context 'when a top left to bottom right winning diagonal is played' do
     it 'declares X the winner' do
       # Act
       @grid.record_move('X', 'A3') # X
@@ -210,6 +210,20 @@ RSpec.describe Grid do
       @grid.record_move('X', 'B2') # X
       @grid.record_move('O', 'B1') # O
       @grid.record_move('X', 'C1') # X - winning move
+
+      # Assert
+      expect(@grid.winner).to eq('X')
+    end
+  end
+
+  context 'when a top right to bottom left winning diagonal is played' do
+    it 'declares X the winner' do
+      # Act
+      @grid.record_move('X', 'C3') # X
+      @grid.record_move('O', 'A2') # O
+      @grid.record_move('X', 'B2') # X
+      @grid.record_move('O', 'B1') # O
+      @grid.record_move('X', 'A1') # X - winning move
 
       # Assert
       expect(@grid.winner).to eq('X')
