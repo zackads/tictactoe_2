@@ -7,6 +7,14 @@ class Grid
       [nil, nil, nil]  # 1
       # A    B    C
     ]
+    @index_lookup = {
+      'A' => 0,
+      'B' => 1,
+      'C' => 2,
+      '1' => 2,
+      '2' => 1,
+      '3' => 0
+    }
   end
 
   def raw
@@ -26,18 +34,23 @@ class Grid
 
   private
 
-  def columns_winner
-    @grid.each { |row| return row.first if row.uniq.size <= 1 }
-    nil
+  def validate_coords(coords)
+    raise ArgumentError, 'Invalid move: cell out of range' unless @index_lookup.key?(coords[0] && coords[1])
   end
 
-  def rows_winner
-    @grid.transpose.each { |row| return row.first if row.uniq.size <= 1 }
-    nil
+  def validate_move(coords)
+    validate_coords(coords)
+    raise ArgumentError, 'Invalid move: square already contains a piece' unless get_cell(coords).nil?
+  end
+
+  def translate_coords_to_indices(coords) # "A3"
+    { col_index: @index_lookup[coords[0]], row_index: @index_lookup[coords[1]] }
   end
 
   def get_cell(coords)
     # Query: "A3" -> contents of "A3", e.g. "X", "O" or nil
+    validate_coords(coords)
+
     col = translate_coords_to_indices(coords)[:col_index]
     row = translate_coords_to_indices(coords)[:row_index]
 
@@ -46,32 +59,21 @@ class Grid
 
   def set_cell(coords, marker)
     # Command: "A3" -> sets contents of "A3" to marker, e.g. 'X' or 'O'
-
-    raise ArgumentError, 'Invalid move: square already contains a piece' unless get_cell(coords).nil?
+    validate_move(coords)
 
     row = translate_coords_to_indices(coords)[:row_index]
     col = translate_coords_to_indices(coords)[:col_index]
     @grid[row][col] = marker
   end
 
-  def coords_valid?(coords)
-    return false unless %w[A B C].include?(coords[0]) && %w[1 2 3].include?(coords[1])
-
-    true
+  def columns_winner
+    @grid.each { |row| return row.first if row.uniq.size <= 1 }
+    nil
   end
 
-  def translate_coords_to_indices(coords) # "A3"
-    index_lookup = {
-      'A' => 0,
-      'B' => 1,
-      'C' => 2,
-      '1' => 2,
-      '2' => 1,
-      '3' => 0
-    }
-    raise ArgumentError, 'Invalid move: move out of range' unless index_lookup.key?(coords[0] && coords[1])
-
-    { col_index: index_lookup[coords[0]], row_index: index_lookup[coords[1]] }
+  def rows_winner
+    @grid.transpose.each { |row| return row.first if row.uniq.size <= 1 }
+    nil
   end
 end
 
