@@ -31,6 +31,10 @@ class Grid
     return diagonal_winner if diagonal_winner
   end
 
+  def full?
+    !@grid.flatten.include?(nil)
+  end
+
   private
 
   def validate_coords(coords)

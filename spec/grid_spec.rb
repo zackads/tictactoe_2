@@ -259,16 +259,34 @@ RSpec.describe Grid do
   end
 
   context 'when there is no winner' do
-    xit 'does not declare a winner' do
+    it 'does not declare a winner' do
       # Act
-      @grid.record_move('O', 'A1') # X
-      @grid.record_move('X', 'B2') # O
-      @grid.record_move('O', 'A2') # X
-      @grid.record_move('X', 'C1') # O
-      @grid.record_move('O', 'C3') # X - winning move
+      @grid.record_move('O', 'A1') # O
+      @grid.record_move('X', 'B2') # X
+      @grid.record_move('O', 'A2') # O
+      @grid.record_move('X', 'C1') # X
+      @grid.record_move('O', 'C3') # O
 
       # Assert
       expect(@grid.winner).to eq(nil)
+    end
+
+    context 'and the grid is full' do
+      it 'declares that the grid is full' do
+        # Act
+        @grid.record_move('X', 'A1') # X
+        @grid.record_move('O', 'B1') # O
+        @grid.record_move('X', 'C1') # X
+        @grid.record_move('O', 'A2') # O
+        @grid.record_move('X', 'B2') # X
+        @grid.record_move('O', 'C2') # O
+        @grid.record_move('X', 'A3') # X
+        @grid.record_move('O', 'B3') # O
+        @grid.record_move('X', 'C3') # X
+
+        # Assert
+        expect(@grid.full?).to eq(true)
+      end
     end
   end
 end
