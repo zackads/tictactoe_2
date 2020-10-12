@@ -64,7 +64,7 @@ RSpec.describe 'the class-based user interface' do
       expect { game.make_move('XYZ') }.to raise_error(ArgumentError) # Not a square
     end
 
-    it 'declares a winner' do
+    xit 'declares a winner' do
       # Arrange
       game = GameManager.new
 
