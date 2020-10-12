@@ -25,12 +25,6 @@ class Grid
     set_cell(coords, player_name)
   end
 
-  # def winner
-  #   return columns_winner if columns_winner
-  #   return rows_winner if rows_winner
-  #   return diagonal_winner if diagonal_winner
-  # end
-
   def full?
     !@grid.flatten.include?(nil)
   end
@@ -46,7 +40,7 @@ class Grid
     raise ArgumentError, 'Invalid move: square already contains a piece' unless get_cell(coords).nil?
   end
 
-  def translate_coords_to_indices(coords) # "A3"
+  def translate_coords_to_indices(coords)
     { col_index: @index_lookup[coords[0]], row_index: @index_lookup[coords[1]] }
   end
 
@@ -68,28 +62,4 @@ class Grid
     col = translate_coords_to_indices(coords)[:col_index]
     @grid[row][col] = marker
   end
-
-  # def columns_winner
-  #   @grid.each { |row| return row.first if row.uniq.size <= 1 }
-  #   nil
-  # end
-
-  # def rows_winner
-  #   @grid.transpose.each { |row| return row.first if row.uniq.size <= 1 }
-  #   nil
-  # end
-
-  # def diagonal_winner
-  #   diagonals = [
-  #     [@grid[0][2], @grid[1][1], @grid[2][0]],
-  #     [@grid[0][0], @grid[1][1], @grid[2][2]]
-  #   ]
-
-  #   diagonals.each { |diagonal| return diagonal.first if diagonal.uniq.size <= 1 }
-  #   nil
-  # end
 end
-
-# finish refactor of coords_valid? extract method
-# all invalid exceptions in one place in one file
-# record_move: array of moves to iterate over
