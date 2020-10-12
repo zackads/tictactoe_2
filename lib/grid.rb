@@ -28,9 +28,7 @@ class Grid
   def winner
     return columns_winner if columns_winner
     return rows_winner if rows_winner
-
-    return 'X' if @grid[0][0] == 'X' && @grid[1][1] == 'X' && @grid[2][2]
-    return 'X' if @grid[0][2] == 'X' && @grid[1][1] == 'X' && @grid[2][0]
+    return diagonal_winner if diagonal_winner
   end
 
   private
@@ -74,6 +72,16 @@ class Grid
 
   def rows_winner
     @grid.transpose.each { |row| return row.first if row.uniq.size <= 1 }
+    nil
+  end
+
+  def diagonal_winner
+    diagonals = [
+      [@grid[0][2], @grid[1][1], @grid[2][0]],
+      [@grid[0][0], @grid[1][1], @grid[2][2]]
+    ]
+
+    diagonals.each { |diagonal| return diagonal.first if diagonal.uniq.size <= 1 }
     nil
   end
 end
