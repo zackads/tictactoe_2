@@ -25,11 +25,11 @@ class Grid
     set_cell(coords, player_name)
   end
 
-  def winner
-    return columns_winner if columns_winner
-    return rows_winner if rows_winner
-    return diagonal_winner if diagonal_winner
-  end
+  # def winner
+  #   return columns_winner if columns_winner
+  #   return rows_winner if rows_winner
+  #   return diagonal_winner if diagonal_winner
+  # end
 
   def full?
     !@grid.flatten.include?(nil)
@@ -69,25 +69,25 @@ class Grid
     @grid[row][col] = marker
   end
 
-  def columns_winner
-    @grid.each { |row| return row.first if row.uniq.size <= 1 }
-    nil
-  end
+  # def columns_winner
+  #   @grid.each { |row| return row.first if row.uniq.size <= 1 }
+  #   nil
+  # end
 
-  def rows_winner
-    @grid.transpose.each { |row| return row.first if row.uniq.size <= 1 }
-    nil
-  end
+  # def rows_winner
+  #   @grid.transpose.each { |row| return row.first if row.uniq.size <= 1 }
+  #   nil
+  # end
 
-  def diagonal_winner
-    diagonals = [
-      [@grid[0][2], @grid[1][1], @grid[2][0]],
-      [@grid[0][0], @grid[1][1], @grid[2][2]]
-    ]
+  # def diagonal_winner
+  #   diagonals = [
+  #     [@grid[0][2], @grid[1][1], @grid[2][0]],
+  #     [@grid[0][0], @grid[1][1], @grid[2][2]]
+  #   ]
 
-    diagonals.each { |diagonal| return diagonal.first if diagonal.uniq.size <= 1 }
-    nil
-  end
+  #   diagonals.each { |diagonal| return diagonal.first if diagonal.uniq.size <= 1 }
+  #   nil
+  # end
 end
 
 # finish refactor of coords_valid? extract method
