@@ -1,8 +1,8 @@
 require 'grid'
 
 class GameManager
-  def initialize
-    @grid = Grid.new
+  def initialize(grid: Grid.new)
+    @grid = grid
     @current_player = 'X'
   end
 
@@ -13,6 +13,10 @@ class GameManager
   def make_move(move)
     @grid.record_move(@current_player, move)
     change_current_player
+  end
+
+  def over?
+    @grid.full?
   end
 
   private
