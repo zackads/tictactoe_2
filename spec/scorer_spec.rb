@@ -5,7 +5,7 @@ RSpec.describe Scorer do
   before(:each) do
     # Arrange
     @grid = Grid.new
-    @scorer = Scorer.new(@grid)
+    @scorer = Scorer.new
   end
 
   context 'when a winning move is played on the top row' do
@@ -18,7 +18,7 @@ RSpec.describe Scorer do
       @grid.record_move('X', 'C3') # X - winning move
 
       # Act
-      winner = @scorer.winner
+      winner = @scorer.winner(@grid)
 
       # Assert
       expect(winner).to eq('X')
@@ -33,7 +33,7 @@ RSpec.describe Scorer do
       @grid.record_move('O', 'C3') # X - winning move
 
       # Act
-      winner = @scorer.winner
+      winner = @scorer.winner(@grid)
 
       # Assert
       expect(winner).to eq('O')
@@ -50,7 +50,7 @@ RSpec.describe Scorer do
       @grid.record_move('X', 'C2') # X - winning move
 
       # Act
-      winner = @scorer.winner
+      winner = @scorer.winner(@grid)
 
       # Assert
       expect(winner).to eq('X')
@@ -65,7 +65,7 @@ RSpec.describe Scorer do
       @grid.record_move('O', 'C2') # X - winning move
 
       # Act
-      winner = @scorer.winner
+      winner = @scorer.winner(@grid)
 
       # Assert
       expect(winner).to eq('O')
@@ -81,7 +81,7 @@ RSpec.describe Scorer do
       @grid.record_move('X', 'C1') # X - winning move
 
       # Act
-      winner = @scorer.winner
+      winner = @scorer.winner(@grid)
 
       # Assert
       expect(winner).to eq('X')
@@ -96,7 +96,7 @@ RSpec.describe Scorer do
       @grid.record_move('O', 'C1') # X - winning move
 
       # Act
-      winner = @scorer.winner
+      winner = @scorer.winner(@grid)
 
       # Assert
       expect(winner).to eq('O')
@@ -113,7 +113,7 @@ RSpec.describe Scorer do
       @grid.record_move('X', 'A1') # X - winning move
 
       # Act
-      winner = @scorer.winner
+      winner = @scorer.winner(@grid)
 
       # Assert
       expect(winner).to eq('X')
@@ -128,7 +128,7 @@ RSpec.describe Scorer do
       @grid.record_move('O', 'A1') # X - winning move
 
       # Act
-      winner = @scorer.winner
+      winner = @scorer.winner(@grid)
 
       # Assert
       expect(winner).to eq('O')
@@ -145,7 +145,7 @@ RSpec.describe Scorer do
       @grid.record_move('X', 'B1') # X - winning move
 
       # Act
-      winner = @scorer.winner
+      winner = @scorer.winner(@grid)
 
       # Assert
       expect(winner).to eq('X')
@@ -160,7 +160,7 @@ RSpec.describe Scorer do
       @grid.record_move('O', 'B1') # X - winning move
 
       # Act
-      winner = @scorer.winner
+      winner = @scorer.winner(@grid)
 
       # Assert
       expect(winner).to eq('O')
@@ -177,7 +177,7 @@ RSpec.describe Scorer do
       @grid.record_move('X', 'C1') # X - winning move
 
       # Act
-      winner = @scorer.winner
+      winner = @scorer.winner(@grid)
 
       # Assert
       expect(winner).to eq('X')
@@ -192,7 +192,7 @@ RSpec.describe Scorer do
       @grid.record_move('O', 'C1') # X - winning move
 
       # Act
-      winner = @scorer.winner
+      winner = @scorer.winner(@grid)
 
       # Assert
       expect(winner).to eq('O')
@@ -209,7 +209,7 @@ RSpec.describe Scorer do
       @grid.record_move('X', 'C1') # X - winning move
 
       # Act
-      winner = @scorer.winner
+      winner = @scorer.winner(@grid)
 
       expect(winner).to eq('X')
     end
@@ -225,7 +225,7 @@ RSpec.describe Scorer do
       @grid.record_move('X', 'A1') # X - winning move
 
       # Act
-      winner = @scorer.winner
+      winner = @scorer.winner(@grid)
 
       # Assert
       expect(winner).to eq('X')
@@ -242,7 +242,7 @@ RSpec.describe Scorer do
       @grid.record_move('O', 'C1') # O - winning move
 
       # Act
-      winner = @scorer.winner
+      winner = @scorer.winner(@grid)
 
       # Assert
       expect(winner).to eq('O')
@@ -259,7 +259,7 @@ RSpec.describe Scorer do
       @grid.record_move('O', 'A1') # O - winning move
 
       # Act
-      winner = @scorer.winner
+      winner = @scorer.winner(@grid)
 
       # Assert
       expect(winner).to eq('O')
@@ -276,7 +276,7 @@ RSpec.describe Scorer do
       @grid.record_move('O', 'C3') # O
 
       # Act
-      winner = @scorer.winner
+      winner = @scorer.winner(@grid)
 
       # Assert
       expect(winner).to eq(nil)

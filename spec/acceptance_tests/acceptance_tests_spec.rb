@@ -81,3 +81,34 @@ RSpec.describe 'the class-based user interface' do
     end
   end
 end
+
+# Design ideas below this line
+
+# class HumanPlayer
+#   def initialize(game)
+#     @game = game
+#   end
+
+#   def take_turn
+#     user_input = get_user_input
+#     game.make_move(user_input)
+#   end
+  
+#   def get_user_input
+#     puts "Enter your move:"
+#     gets user_input
+#     user_input
+#   end
+# end
+
+# class AIPlayer
+#   def initialize(game)
+#     @game = game
+#   end
+
+#   def take_turn
+#     # ...
+#   end
+
+#   def get_u
+# end
