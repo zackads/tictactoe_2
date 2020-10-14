@@ -1,5 +1,7 @@
 class Scorer
-  def initialize(grid = Grid.new)
+  attr_accessor :grid
+
+  def initialize(grid = nil)
     @grid = grid
   end
 
