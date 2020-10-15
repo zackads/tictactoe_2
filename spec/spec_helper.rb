@@ -11,3 +11,9 @@ RSpec.configure do |config|
     c.syntax = :expect
   end
 end
+
+def be_included_in(first_value, *rest)
+  rest.reduce(eq(first_value)) do |matcher, value|
+    matcher.or eq(value)
+  end
+end
