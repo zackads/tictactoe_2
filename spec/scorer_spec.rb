@@ -9,7 +9,7 @@ RSpec.describe Scorer do
   end
 
   context 'when a winning move is played on the top row' do
-    it 'declares X the winner' do
+    xit 'declares X the winner' do
       # Arrange
       @grid.record_move('X', 'A3') # X
       @grid.record_move('O', 'B2') # O
@@ -24,7 +24,7 @@ RSpec.describe Scorer do
       expect(winner).to eq('X')
     end
 
-    it 'declares O the winner' do
+    xit 'declares O the winner' do
       # Arrange
       @grid.record_move('O', 'A3') # X
       @grid.record_move('X', 'B1') # O
@@ -41,7 +41,7 @@ RSpec.describe Scorer do
   end
 
   context 'when a winning move is played on the middle row' do
-    it 'declares X the winner' do
+    xit 'declares X the winner' do
       # Arrange
       @grid.record_move('X', 'A2') # X
       @grid.record_move('O', 'B3') # O
@@ -56,7 +56,7 @@ RSpec.describe Scorer do
       expect(winner).to eq('X')
     end
 
-    it 'declares O the winner' do
+    xit 'declares O the winner' do
       # Arange
       @grid.record_move('O', 'A2') # X
       @grid.record_move('X', 'B3') # O
@@ -72,7 +72,7 @@ RSpec.describe Scorer do
     end
   end
   context 'when a winning move is played on the bottom row' do
-    it 'declares X the winner' do
+    xit 'declares X the winner' do
       # Arrange
       @grid.record_move('X', 'A1') # X
       @grid.record_move('O', 'B3') # O
@@ -87,7 +87,7 @@ RSpec.describe Scorer do
       expect(winner).to eq('X')
     end
 
-    it 'declares X the winner' do
+    xit 'declares X the winner' do
       # Arrange
       @grid.record_move('O', 'A1') # X
       @grid.record_move('X', 'B3') # O
@@ -104,7 +104,7 @@ RSpec.describe Scorer do
   end
 
   context 'when a winning move is played in the first column' do
-    it 'declares X the winner' do
+    xit 'declares X the winner' do
       # Arrange
       @grid.record_move('X', 'A3') # X
       @grid.record_move('O', 'B2') # O
@@ -119,7 +119,7 @@ RSpec.describe Scorer do
       expect(winner).to eq('X')
     end
 
-    it 'declares O the winner' do
+    xit 'declares O the winner' do
       # Arrange
       @grid.record_move('O', 'A3') # X
       @grid.record_move('X', 'B2') # O
@@ -136,7 +136,7 @@ RSpec.describe Scorer do
   end
 
   context 'when a winning move is played in the second column' do
-    it 'declares X the winner' do
+    xit 'declares X the winner' do
       # Arrange
       @grid.record_move('X', 'B3') # X
       @grid.record_move('O', 'A2') # O
@@ -151,7 +151,7 @@ RSpec.describe Scorer do
       expect(winner).to eq('X')
     end
 
-    it 'declares O the winner' do
+    xit 'declares O the winner' do
       # Arrange
       @grid.record_move('O', 'B3') # X
       @grid.record_move('X', 'A2') # O
@@ -168,7 +168,7 @@ RSpec.describe Scorer do
   end
 
   context 'when a winning move is played in the third column' do
-    it 'declares X the winner' do
+    xit 'declares X the winner' do
       # Arrange
       @grid.record_move('X', 'C3') # X
       @grid.record_move('O', 'A2') # O
@@ -183,7 +183,7 @@ RSpec.describe Scorer do
       expect(winner).to eq('X')
     end
 
-    it 'declares O the winner' do
+    xit 'declares O the winner' do
       # Arrange
       @grid.record_move('O', 'C3') # X
       @grid.record_move('X', 'A2') # O
@@ -200,7 +200,7 @@ RSpec.describe Scorer do
   end
 
   context 'when X plays a top left to bottom right winning diagonal is played' do
-    it 'declares X the winner' do
+    xit 'declares X the winner' do
       # Arrange
       @grid.record_move('X', 'A3') # X
       @grid.record_move('O', 'A2') # O
@@ -216,7 +216,7 @@ RSpec.describe Scorer do
   end
 
   context 'when X plays a top right to bottom left winning diagonal is played' do
-    it 'declares X the winner' do
+    xit 'declares X the winner' do
       # Arrange
       @grid.record_move('X', 'C3') # X
       @grid.record_move('O', 'A2') # O
@@ -233,7 +233,7 @@ RSpec.describe Scorer do
   end
 
   context 'when O plays a top left to bottom right winning diagonal' do
-    it 'declares O the winner' do
+    xit 'declares O the winner' do
       # Arrange
       @grid.record_move('O', 'A3') # O
       @grid.record_move('X', 'A2') # X
@@ -250,7 +250,7 @@ RSpec.describe Scorer do
   end
 
   context 'when O plays a top right to bottom left winning diagonal' do
-    it 'declares O the winner' do
+    xit 'declares O the winner' do
       # Arrange
       @grid.record_move('O', 'C3') # O
       @grid.record_move('X', 'A2') # X
@@ -267,7 +267,7 @@ RSpec.describe Scorer do
   end
 
   context 'when there is no winner' do
-    it 'does not declare a winner' do
+    xit 'does not declare a winner' do
       # Arrange
       @grid.record_move('O', 'A1') # O
       @grid.record_move('X', 'B2') # X

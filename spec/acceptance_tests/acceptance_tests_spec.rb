@@ -8,16 +8,11 @@ RSpec.describe 'the class-based user interface' do
         game = GameManager.new
 
         # Assert
-        expect(game.grid).to eq([
-                                  [nil, nil, nil], # 3
-                                  [nil, nil, nil], # 2
-                                  [nil, nil, nil]  # 1
-                                  # A    B    C
-                                ])
+        expect(game.grid).to eq([0, 1, 2, 3, 4, 5, 6, 7, 8])
       end
 
       context 'when the user makes her first move' do
-        it 'records that move on the grid' do
+        xit 'records that move on the grid' do
           # Arrange
           game = GameManager.new
 
@@ -34,7 +29,7 @@ RSpec.describe 'the class-based user interface' do
       end
     end
 
-    it 'records moves from players' do
+    xit 'records moves from players' do
       # Arrange
       game = GameManager.new
 
@@ -51,7 +46,7 @@ RSpec.describe 'the class-based user interface' do
                               ]) # A    B    C
     end
 
-    it 'does not invalid moves' do
+    xit 'does not invalid moves' do
       # Arrange
       game = GameManager.new
 
@@ -64,7 +59,7 @@ RSpec.describe 'the class-based user interface' do
       expect { game.make_move('XYZ') }.to raise_error(ArgumentError) # Not a square
     end
 
-    it 'declares a winner' do
+    xit 'declares a winner' do
       # Arrange
       game = GameManager.new
 
@@ -93,7 +88,7 @@ end
 #     user_input = get_user_input
 #     game.make_move(user_input)
 #   end
-  
+
 #   def get_user_input
 #     puts "Enter your move:"
 #     gets user_input
