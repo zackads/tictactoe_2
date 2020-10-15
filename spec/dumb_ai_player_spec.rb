@@ -19,7 +19,7 @@ RSpec.describe DumbAIPlayer do
         # Arrange
         game = spy('GameManager')
         ai_player = DumbAIPlayer.new('X', game)
-        possible_valid_moves = %w[A1 A2 A3 B1 B2 B3 C1 C2 C3]
+        possible_valid_moves = [0, 1, 2, 3, 4, 5, 6, 7, 8]
 
         # Act
         ai_player.play

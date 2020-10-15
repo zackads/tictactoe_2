@@ -8,14 +8,10 @@ RSpec.describe 'the class-based user interface' do
         game = GameManager.new
 
         # Act
-        game.make_move('A3')
+        game.make_move(0)
 
         # Assert
-        expect(game.grid).to eq(
-          [['X', nil, nil],
-           [nil, nil, nil],
-           [nil, nil, nil]]
-        )
+        expect(game.grid).to eq(['X', 1, 2, 3, 4, 5, 6, 7, 8])
       end
     end
 
@@ -24,20 +20,11 @@ RSpec.describe 'the class-based user interface' do
       game = GameManager.new
 
       # Act
-      game.make_move('A3')
-      game.make_move('B2')
+      game.make_move(0)
+      game.make_move(4)
 
       # Assert
-      expect(game.grid).to eq(
-        [['X', nil, nil],
-         [nil, 'O', nil],
-         [nil, nil, nil]]
-      )
+      expect(game.grid).to eq(['X', 1, 2, 3, 'O', 5, 6, 7, 8])
     end
   end
 end
-
-#   ['X', nil, nil], # 3
-#   [nil, 'O', nil], # 2
-#   ['X', nil, nil]  # 1
-# ]) # A    B    C

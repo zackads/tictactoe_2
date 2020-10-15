@@ -11,11 +11,11 @@ RSpec.describe Scorer do
   context 'when a winning move is played on the top row' do
     it 'declares X the winner' do
       # Arrange
-      @grid.record_move('X', 'A3') # X
-      @grid.record_move('O', 'B2') # O
-      @grid.record_move('X', 'B3') # X
-      @grid.record_move('O', 'C1') # O
-      @grid.record_move('X', 'C3') # X - winning move
+      @grid.record_move('X', 0) # X
+      @grid.record_move('O', 4) # O
+      @grid.record_move('X', 1) # X
+      @grid.record_move('O', 8) # O
+      @grid.record_move('X', 2) # X - winning move
 
       # Act
       winner = @scorer.winner(@grid)
@@ -26,11 +26,11 @@ RSpec.describe Scorer do
 
     it 'declares O the winner' do
       # Arrange
-      @grid.record_move('O', 'A3') # X
-      @grid.record_move('X', 'B1') # O
-      @grid.record_move('O', 'B3') # X
-      @grid.record_move('X', 'C1') # O
-      @grid.record_move('O', 'C3') # X - winning move
+      @grid.record_move('O', 0) # X
+      @grid.record_move('X', 7) # O
+      @grid.record_move('O', 1) # X
+      @grid.record_move('X', 8) # O
+      @grid.record_move('O', 2) # X - winning move
 
       # Act
       winner = @scorer.winner(@grid)
@@ -43,11 +43,11 @@ RSpec.describe Scorer do
   context 'when a winning move is played on the middle row' do
     it 'declares X the winner' do
       # Arrange
-      @grid.record_move('X', 'A2') # X
-      @grid.record_move('O', 'B3') # O
-      @grid.record_move('X', 'B2') # X
-      @grid.record_move('O', 'C1') # O
-      @grid.record_move('X', 'C2') # X - winning move
+      @grid.record_move('X', 3) # X
+      @grid.record_move('O', 1) # O
+      @grid.record_move('X', 4) # X
+      @grid.record_move('O', 8) # O
+      @grid.record_move('X', 5) # X - winning move
 
       # Act
       winner = @scorer.winner(@grid)
@@ -58,11 +58,11 @@ RSpec.describe Scorer do
 
     it 'declares O the winner' do
       # Arange
-      @grid.record_move('O', 'A2') # X
-      @grid.record_move('X', 'B3') # O
-      @grid.record_move('O', 'B2') # X
-      @grid.record_move('X', 'C1') # O
-      @grid.record_move('O', 'C2') # X - winning move
+      @grid.record_move('O', 3) # X
+      @grid.record_move('X', 1) # O
+      @grid.record_move('O', 4) # X
+      @grid.record_move('X', 8) # O
+      @grid.record_move('O', 5) # X - winning move
 
       # Act
       winner = @scorer.winner(@grid)
@@ -74,11 +74,11 @@ RSpec.describe Scorer do
   context 'when a winning move is played on the bottom row' do
     it 'declares X the winner' do
       # Arrange
-      @grid.record_move('X', 'A1') # X
-      @grid.record_move('O', 'B3') # O
-      @grid.record_move('X', 'B1') # X
-      @grid.record_move('O', 'C2') # O
-      @grid.record_move('X', 'C1') # X - winning move
+      @grid.record_move('X', 6) # X
+      @grid.record_move('O', 1) # O
+      @grid.record_move('X', 7) # X
+      @grid.record_move('O', 5) # O
+      @grid.record_move('X', 8) # X - winning move
 
       # Act
       winner = @scorer.winner(@grid)
@@ -89,11 +89,11 @@ RSpec.describe Scorer do
 
     it 'declares X the winner' do
       # Arrange
-      @grid.record_move('O', 'A1') # X
-      @grid.record_move('X', 'B3') # O
-      @grid.record_move('O', 'B1') # X
-      @grid.record_move('X', 'C2') # O
-      @grid.record_move('O', 'C1') # X - winning move
+      @grid.record_move('O', 6) # X
+      @grid.record_move('X', 1) # O
+      @grid.record_move('O', 7) # X
+      @grid.record_move('X', 5) # O
+      @grid.record_move('O', 8) # X - winning move
 
       # Act
       winner = @scorer.winner(@grid)
@@ -106,11 +106,11 @@ RSpec.describe Scorer do
   context 'when a winning move is played in the first column' do
     it 'declares X the winner' do
       # Arrange
-      @grid.record_move('X', 'A3') # X
-      @grid.record_move('O', 'B2') # O
-      @grid.record_move('X', 'A2') # X
-      @grid.record_move('O', 'C1') # O
-      @grid.record_move('X', 'A1') # X - winning move
+      @grid.record_move('X', 0) # X
+      @grid.record_move('O', 4) # O
+      @grid.record_move('X', 3) # X
+      @grid.record_move('O', 8) # O
+      @grid.record_move('X', 6) # X - winning move
 
       # Act
       winner = @scorer.winner(@grid)
@@ -121,11 +121,11 @@ RSpec.describe Scorer do
 
     it 'declares O the winner' do
       # Arrange
-      @grid.record_move('O', 'A3') # X
-      @grid.record_move('X', 'B2') # O
-      @grid.record_move('O', 'A2') # X
-      @grid.record_move('X', 'C1') # O
-      @grid.record_move('O', 'A1') # X - winning move
+      @grid.record_move('O', 0) # X
+      @grid.record_move('X', 4) # O
+      @grid.record_move('O', 3) # X
+      @grid.record_move('X', 8) # O
+      @grid.record_move('O', 6) # X - winning move
 
       # Act
       winner = @scorer.winner(@grid)
@@ -138,11 +138,11 @@ RSpec.describe Scorer do
   context 'when a winning move is played in the second column' do
     it 'declares X the winner' do
       # Arrange
-      @grid.record_move('X', 'B3') # X
-      @grid.record_move('O', 'A2') # O
-      @grid.record_move('X', 'B2') # X
-      @grid.record_move('O', 'C1') # O
-      @grid.record_move('X', 'B1') # X - winning move
+      @grid.record_move('X', 1) # X
+      @grid.record_move('O', 3) # O
+      @grid.record_move('X', 4) # X
+      @grid.record_move('O', 8) # O
+      @grid.record_move('X', 7) # X - winning move
 
       # Act
       winner = @scorer.winner(@grid)
@@ -153,11 +153,11 @@ RSpec.describe Scorer do
 
     it 'declares O the winner' do
       # Arrange
-      @grid.record_move('O', 'B3') # X
-      @grid.record_move('X', 'A2') # O
-      @grid.record_move('O', 'B2') # X
-      @grid.record_move('X', 'C1') # O
-      @grid.record_move('O', 'B1') # X - winning move
+      @grid.record_move('O', 1) # X
+      @grid.record_move('X', 3) # O
+      @grid.record_move('O', 4) # X
+      @grid.record_move('X', 8) # O
+      @grid.record_move('O', 7) # X - winning move
 
       # Act
       winner = @scorer.winner(@grid)
@@ -170,11 +170,11 @@ RSpec.describe Scorer do
   context 'when a winning move is played in the third column' do
     it 'declares X the winner' do
       # Arrange
-      @grid.record_move('X', 'C3') # X
-      @grid.record_move('O', 'A2') # O
-      @grid.record_move('X', 'C2') # X
-      @grid.record_move('O', 'B1') # O
-      @grid.record_move('X', 'C1') # X - winning move
+      @grid.record_move('X', 2) # X
+      @grid.record_move('O', 3) # O
+      @grid.record_move('X', 5) # X
+      @grid.record_move('O', 7) # O
+      @grid.record_move('X', 8) # X - winning move
 
       # Act
       winner = @scorer.winner(@grid)
@@ -185,11 +185,11 @@ RSpec.describe Scorer do
 
     it 'declares O the winner' do
       # Arrange
-      @grid.record_move('O', 'C3') # X
-      @grid.record_move('X', 'A2') # O
-      @grid.record_move('O', 'C2') # X
-      @grid.record_move('X', 'B1') # O
-      @grid.record_move('O', 'C1') # X - winning move
+      @grid.record_move('O', 2) # X
+      @grid.record_move('X', 3) # O
+      @grid.record_move('O', 5) # X
+      @grid.record_move('X', 7) # O
+      @grid.record_move('O', 8) # X - winning move
 
       # Act
       winner = @scorer.winner(@grid)
@@ -202,11 +202,11 @@ RSpec.describe Scorer do
   context 'when X plays a top left to bottom right winning diagonal is played' do
     it 'declares X the winner' do
       # Arrange
-      @grid.record_move('X', 'A3') # X
-      @grid.record_move('O', 'A2') # O
-      @grid.record_move('X', 'B2') # X
-      @grid.record_move('O', 'B1') # O
-      @grid.record_move('X', 'C1') # X - winning move
+      @grid.record_move('X', 0) # X
+      @grid.record_move('O', 3) # O
+      @grid.record_move('X', 4) # X
+      @grid.record_move('O', 7) # O
+      @grid.record_move('X', 8) # X - winning move
 
       # Act
       winner = @scorer.winner(@grid)
@@ -218,11 +218,11 @@ RSpec.describe Scorer do
   context 'when X plays a top right to bottom left winning diagonal is played' do
     it 'declares X the winner' do
       # Arrange
-      @grid.record_move('X', 'C3') # X
-      @grid.record_move('O', 'A2') # O
-      @grid.record_move('X', 'B2') # X
-      @grid.record_move('O', 'B1') # O
-      @grid.record_move('X', 'A1') # X - winning move
+      @grid.record_move('X', 2) # X
+      @grid.record_move('O', 3) # O
+      @grid.record_move('X', 4) # X
+      @grid.record_move('O', 7) # O
+      @grid.record_move('X', 6) # X - winning move
 
       # Act
       winner = @scorer.winner(@grid)
@@ -235,11 +235,11 @@ RSpec.describe Scorer do
   context 'when O plays a top left to bottom right winning diagonal' do
     it 'declares O the winner' do
       # Arrange
-      @grid.record_move('O', 'A3') # O
-      @grid.record_move('X', 'A2') # X
-      @grid.record_move('O', 'B2') # O
-      @grid.record_move('X', 'B1') # X
-      @grid.record_move('O', 'C1') # O - winning move
+      @grid.record_move('O', 2) # O
+      @grid.record_move('X', 3) # X
+      @grid.record_move('O', 4) # O
+      @grid.record_move('X', 7) # X
+      @grid.record_move('O', 6) # O - winning move
 
       # Act
       winner = @scorer.winner(@grid)
@@ -252,11 +252,11 @@ RSpec.describe Scorer do
   context 'when O plays a top right to bottom left winning diagonal' do
     it 'declares O the winner' do
       # Arrange
-      @grid.record_move('O', 'C3') # O
-      @grid.record_move('X', 'A2') # X
-      @grid.record_move('O', 'B2') # O
-      @grid.record_move('X', 'B1') # X
-      @grid.record_move('O', 'A1') # O - winning move
+      @grid.record_move('O', 2) # O
+      @grid.record_move('X', 3) # X
+      @grid.record_move('O', 4) # O
+      @grid.record_move('X', 7) # X
+      @grid.record_move('O', 6) # O - winning move
 
       # Act
       winner = @scorer.winner(@grid)
@@ -269,11 +269,11 @@ RSpec.describe Scorer do
   context 'when there is no winner' do
     it 'does not declare a winner' do
       # Arrange
-      @grid.record_move('O', 'A1') # O
-      @grid.record_move('X', 'B2') # X
-      @grid.record_move('O', 'A2') # O
-      @grid.record_move('X', 'C1') # X
-      @grid.record_move('O', 'C3') # O
+      @grid.record_move('O', 6) # O
+      @grid.record_move('X', 4) # X
+      @grid.record_move('O', 3) # O
+      @grid.record_move('X', 8) # X
+      @grid.record_move('O', 2) # O
 
       # Act
       winner = @scorer.winner(@grid)

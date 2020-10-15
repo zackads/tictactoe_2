@@ -1,29 +1,32 @@
 class Scorer
+  WINNING_COMBINATIONS = [
+    [0, 1, 2], # top row
+    [3, 4, 5], # middle row
+    [6, 7, 8], # bottom row
+    [0, 3, 6], # left vertical
+    [1, 4, 7], # middle vertical
+    [2, 5, 8], # right vertical
+    [0, 4, 8], # left diagonal
+    [2, 4, 6] # right diagonal
+  ].freeze
+
   def winner(grid)
-    return columns_winner(grid) if columns_winner(grid)
-    return rows_winner(grid) if rows_winner(grid)
-    return diagonal_winner(grid) if diagonal_winner(grid)
+    WINNING_COMBINATIONS.each do |combination|
+      if array_is_all_the_same?([grid.raw[combination[0]], grid.raw[combination[1]], grid.raw[combination[2]]])
+        winning_token = grid.raw[combination[0]]
+        return winning_token
+      end
+    end
+    winner_not_found
   end
 
   private
 
-  def columns_winner(grid)
-    grid.raw.each { |row| return row.first if row.uniq.size <= 1 }
-    nil
+  def array_is_all_the_same?(array)
+    array.uniq.size == 1
   end
 
-  def rows_winner(grid)
-    grid.raw.transpose.each { |row| return row.first if row.uniq.size <= 1 }
-    nil
-  end
-
-  def diagonal_winner(grid)
-    diagonals = [
-      [grid.raw[0][2], grid.raw[1][1], grid.raw[2][0]],
-      [grid.raw[0][0], grid.raw[1][1], grid.raw[2][2]]
-    ]
-
-    diagonals.each { |diagonal| return diagonal.first if diagonal.uniq.size <= 1 }
+  def winner_not_found
     nil
   end
 end

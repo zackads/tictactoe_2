@@ -7,6 +7,6 @@ class DumbAIPlayer
   end
 
   def play
-    @game.make_move('A3')
+    @game.make_move(0)
   end
 end
