@@ -26,7 +26,7 @@ RSpec.describe Grid do
   end
 
   context 'when an invalid move is added' do
-    it 'raises an argument exception' do
+    xit 'raises an argument exception' do
       # Act
       @grid.record_move('X', 0)
 
@@ -38,7 +38,7 @@ RSpec.describe Grid do
   end
 
   context 'when the grid is full' do
-    it 'declares that the grid is full' do
+    xit 'declares that the grid is full' do
       # Arrange
       @grid.record_move('X', 6) # X
       @grid.record_move('O', 7) # O

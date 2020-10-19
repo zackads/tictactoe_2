@@ -12,7 +12,7 @@ RSpec.describe 'the class-based user interface' do
       end
 
       context 'when the user makes her first move' do
-        it 'records that move on the grid' do
+        xit 'records that move on the grid' do
           # Arrange
           game = GameManager.new
 
@@ -25,7 +25,7 @@ RSpec.describe 'the class-based user interface' do
       end
     end
 
-    it 'records moves from players' do
+    xit 'records moves from players' do
       # Arrange
       game = GameManager.new
 
@@ -51,7 +51,7 @@ RSpec.describe 'the class-based user interface' do
       expect { game.make_move('XYZ') }.to raise_error(ArgumentError) # Not a square
     end
 
-    it 'declares a winner' do
+    xit 'declares a winner' do
       # Arrange
       game = GameManager.new
 
