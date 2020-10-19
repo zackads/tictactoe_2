@@ -28,16 +28,23 @@ RSpec.describe DumbAIStrategy do
 
     context 'when passed a partially filled grid' do
       it 'makes random moves on empty squares only' do
-        # Arrange
-        empty_squares = [2, 3, 4, 7, 8]
-        grid = double('grid', raw: ['X', 'O', 2, 3, 4, 'X', 'O', 7, 8], empty_squares: empty_squares)
-        strategy = DumbAIStrategy.new
+        expectations = [
+          { grid_state: ['X', 'O', 2, 3, 4, 'X', 'O', 7, 8], empty_squares: [2, 3, 4, 7, 8] },
+          { grid_state: [0, 'X', 'O', 3, 'O', 5, 6, 'X', 8], empty_squares: [0, 3, 5, 6, 8] },
+          { grid_state: [0, 1, 2, 'X', 'O', 5, 'X', 7, 'O'], empty_squares: [0, 1, 2, 5, 7] }
+        ]
 
-        # Act
-        move = strategy.get_move(grid)
+        expectations.each do |test_case|
+          # Arrange
+          grid = double('grid', raw: test_case[:grid_state], empty_squares: test_case[:empty_squares])
+          strategy = DumbAIStrategy.new
 
-        # Assert
-        expect(move).to be_included_in(*empty_squares)
+          # Act
+          move = strategy.get_move(grid)
+
+          # Assert
+          expect(move).to be_included_in(*test_case[:empty_squares])
+        end
       end
     end
   end
