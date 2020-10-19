@@ -57,4 +57,26 @@ RSpec.describe Grid do
       expect(is_grid_full).to eq(true)
     end
   end
+
+  context 'when the grid is partially filled with moves' do
+    it 'declares which squares are empty' do
+      expectations = [
+        { moves: [3, 4, 5, 6, 7, 8], empty_squares: [0, 1, 2] }
+      ]
+
+      expectations.each do |test_case|
+        # Arrange
+        test_case[:moves].each_with_index do |move, index|
+          player = index.odd? ? 'X' : 'O'
+          @grid.record_move(player, move)
+        end
+
+        # Act
+        empty_squares = @grid.empty_squares
+
+        # Assert
+        expect(empty_squares).to eq(test_case[:empty_squares])
+      end
+    end
+  end
 end

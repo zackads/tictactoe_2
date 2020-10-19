@@ -23,6 +23,11 @@ class Grid
     !@grid.flatten.include?(nil)
   end
 
+  def empty_squares
+    # Return grid squares that do not have an 'X' or 'O' on them
+    @grid.select { |square| square != 'X' && square != 'O' }
+  end
+
   private
 
   def validate_coords(coords)
