@@ -1,3 +1,5 @@
 class DumbAIStrategy
-  def make_move(grid); end
+  def get_move(grid)
+    grid.empty_squares.sample
+  end
 end
