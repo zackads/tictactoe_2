@@ -2,7 +2,7 @@ require 'dumb_ai_player'
 
 RSpec.describe DumbAIPlayer do
   context 'when created' do
-    xit 'remembers its token' do
+    it 'remembers its token' do
       # Arrange
       game = double('Game')
       ai_player = DumbAIPlayer.new('X', game)
@@ -15,7 +15,7 @@ RSpec.describe DumbAIPlayer do
     end
 
     context 'when it plays a valid move,' do
-      xit 'that move is sent to the game' do
+      it 'that move is sent to the game' do
         # Arrange
         game = spy('GameManager')
         ai_player = DumbAIPlayer.new('X', game)

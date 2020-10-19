@@ -2,7 +2,7 @@ require 'game_manager'
 
 RSpec.describe GameManager do
   context 'when the grid is full' do
-    xit 'the game is over' do
+    it 'the game is over' do
       # Arrange
       grid = double('Grid', full?: true)
       scorer = double('Scorer', winner: nil, grid: grid)
@@ -17,7 +17,7 @@ RSpec.describe GameManager do
   end
 
   context 'when the grid is not full but X is the winner' do
-    xit 'the game is over' do
+    it 'the game is over' do
       # Arrange
       grid = double('Grid', full?: false)
       scorer = double('Scorer', winner: 'X', grid: grid)
@@ -32,7 +32,7 @@ RSpec.describe GameManager do
   end
 
   context 'when the grid is not full but O is the winner' do
-    xit 'the game is over' do
+    it 'the game is over' do
       # Arrange
       grid = double('Grid', full?: false)
       scorer = double('Scorer', winner: 'O', grid: grid)
@@ -47,7 +47,7 @@ RSpec.describe GameManager do
   end
 
   context 'when the grid is full but X is the winner' do
-    xit 'the game is over' do
+    it 'the game is over' do
       # Arrange
       grid = double('Grid', full?: true)
       scorer = double('Scorer', winner: 'X', grid: grid)
@@ -62,7 +62,7 @@ RSpec.describe GameManager do
   end
 
   context 'when the grid is full and O is the winner' do
-    xit 'the game is over' do
+    it 'the game is over' do
       # Arrange
       grid = double('Grid', full?: true)
       scorer = double('Scorer', winner: 'O', grid: grid)
@@ -77,7 +77,7 @@ RSpec.describe GameManager do
   end
 
   context 'when a winning move is played by X' do
-    xit 'X is the winner' do
+    it 'X is the winner' do
       # Arrange
       grid = double('Grid', full?: true)
       scorer = double('Scorer', winner: 'X', grid: grid)
@@ -92,7 +92,7 @@ RSpec.describe GameManager do
   end
 
   context 'when a winning move is played by O' do
-    xit 'O is the winner' do
+    it 'O is the winner' do
       # Arrange
       grid = double('Grid', full?: true)
       scorer = double('Scorer', winner: 'O', grid: grid)
