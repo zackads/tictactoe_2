@@ -1,12 +1,13 @@
 class Player
   attr_reader :token
 
-  def initialize(token, game)
+  def initialize(token, strategy)
     @token = token
-    @game = game
+    @strategy = strategy
   end
 
-  def play
-    @game.make_move(0)
+  def make_move(grid)
+    move = @strategy.get_move(grid)
+    grid.record_move(@token, move)
   end
 end
