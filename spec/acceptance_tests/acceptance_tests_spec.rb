@@ -5,8 +5,8 @@ RSpec.describe 'the class-based user interface' do
     context 'when the user creates a new game by instantiating the GameManager class' do
       it 'creates a blank grid' do
         # Arrange
-        player_strategy = CLI.new
-        ai_strategy = DumbAI.new
+        player_strategy = CLIStrategy.new
+        ai_strategy = DumbAIStrategy.new
         game = GameManager.new(Player.new('X', player_strategy), Player.new('O', ai_strategy))
 
         # Assert

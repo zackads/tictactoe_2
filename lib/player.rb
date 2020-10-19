@@ -8,6 +8,7 @@ class Player
 
   def make_move(grid)
     move = @strategy.get_move(grid)
+
     grid.record_move(@token, move)
   end
 end
