@@ -11,8 +11,7 @@ class CLIStrategy
       GRID
 
       puts "Make your next move: \n"
-      move = $stdin.gets
-      0
+      move = $stdin.gets.to_i
   end
 end
 

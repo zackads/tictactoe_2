@@ -86,7 +86,22 @@ RSpec.describe CLIStrategy do
       # Assert
       expect($stdin).to have_received(:gets)
     end
+
+    it 'converts user input into a valid grid square' do
+      # Arrange
+      $stdin = spy('stdin', gets: "0")
+      strategy = CLIStrategy.new
+      grid = double('grid', raw: [0, 1, 2, 3, 4, 5, 6, 7, 8], empty_sqaures: [0, 1, 2, 3, 4, 5, 6, 7, 8] )
+
+      # Act
+      move = strategy.get_move(grid)
+
+      # Assert
+      expect(move).to eq(0)
+    end
   end
+
+
 
     xit 'does not allow the user to enter an invalid move' do
     end
