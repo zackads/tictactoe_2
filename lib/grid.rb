@@ -23,10 +23,15 @@ class Grid
     !@grid.flatten.include?(nil)
   end
 
+  def empty_squares
+    # Return grid squares that do not have an 'X' or 'O' on them
+    @grid.select { |square| square != 'X' && square != 'O' }
+  end
+
   private
 
   def validate_coords(coords)
-    raise ArgumentError, 'Invalid move: cell out of range' unless @grid.include?(coords)
+    raise ArgumentError, 'Invalid move: cell out of range' unless coords < @grid.size
   end
 
   def validate_move(coords)
