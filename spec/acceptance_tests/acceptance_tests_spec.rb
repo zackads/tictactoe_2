@@ -1,4 +1,7 @@
 require 'game_manager'
+require 'cli_strategy'
+require 'dumb_ai_strategy'
+require 'player'
 
 RSpec.describe 'the class-based user interface' do
   describe GameManager do
@@ -7,7 +10,7 @@ RSpec.describe 'the class-based user interface' do
         # Arrange
         player_strategy = CLIStrategy.new
         ai_strategy = DumbAIStrategy.new
-        game = GameManager.new(Player.new('X', player_strategy), Player.new('O', ai_strategy))
+        game = GameManager.new(players: [Player.new('X', player_strategy), Player.new('O', ai_strategy)])
 
         # Assert
         expect(game.grid).to eq([0, 1, 2, 3, 4, 5, 6, 7, 8])

@@ -1,23 +1,24 @@
 require 'grid'
 
 class GameManager
-  def initialize(grid: Grid.new, scorer: Scorer.new)
+  def initialize(grid: Grid.new, scorer: Scorer.new, players: [])
     @grid = grid
     @scorer = scorer
-    @current_player = 'X'
+    @players = players
+    @current_player = @players.first
   end
 
   def grid
     @grid.raw
   end
 
-  def make_move(move)
-    @grid.record_move(@current_player, move)
+  def make_move
+    @current_player.make_move(grid)
     change_current_player
   end
 
   def over?
-    @grid.full? || %w[X O].include?(winner) 
+    @grid.full? || %w[X O].include?(winner)
   end
 
   def winner
@@ -27,6 +28,7 @@ class GameManager
   private
 
   def change_current_player
-    @current_player = @current_player == 'X' ? 'O' : 'X'
+    @players = @players.rotate
+    @current_player = @players.first
   end
 end
