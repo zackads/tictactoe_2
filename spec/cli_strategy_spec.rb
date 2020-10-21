@@ -80,11 +80,9 @@ RSpec.describe CLIStrategy do
         strategy = CLIStrategy.new
         grid = double('grid', raw: [0, 1, 2, 3, 4, 5, 6, 7, 8], empty_sqaures: [0, 1, 2, 3, 4, 5, 6, 7, 8])
 
-        # Act
-        move = strategy.get_move(grid)
-
-        # Assert
-        expect($stdin).to have_received(:gets)
+        # Act & Assert
+        expect_any_instance_of(Object).to receive(:gets)
+        strategy.get_move(grid)
       end
 
       it 'converts user input into a valid grid square' do

@@ -1,6 +1,6 @@
 class CLIStrategy
   def get_move(grid)
-      print <<~GRID
+    print <<~GRID
       +---+---+---+
       | #{grid.raw[0]} | #{grid.raw[1]} | #{grid.raw[2]} |
       +---+---+---+
@@ -8,11 +8,9 @@ class CLIStrategy
       +---+---+---+
       | #{grid.raw[6]} | #{grid.raw[7]} | #{grid.raw[8]} |
       +---+---+---+
-      GRID
+    GRID
 
-      puts "Make your next move: \n"
-      move = $stdin.gets.to_i
+    puts "Make your next move: \n"
+    move = gets.to_i
   end
 end
-
-
