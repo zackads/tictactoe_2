@@ -25,16 +25,6 @@ end
 
 RSpec.describe 'old design acceptance tests' do
   context 'when the user creates a new game by instantiating the GameManager class' do
-    xit 'creates a blank grid' do
-      # Arrange
-      player_strategy = CLIStrategy.new
-      ai_strategy = DumbAIStrategy.new
-      game = GameManager.new(Player.new('X', player_strategy), Player.new('O', ai_strategy))
-
-      # Assert
-      expect(game.grid).to eq([0, 1, 2, 3, 4, 5, 6, 7, 8])
-    end
-
     context 'when the user makes her first move' do
       xit 'records that move on the grid' do
         # Arrange
