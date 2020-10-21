@@ -1,8 +1,5 @@
-require 'grid'
-require 'scorer'
-
 class GameManager
-  def initialize(grid: Grid.new, scorer: Scorer.new, players: [])
+  def initialize(grid: nil, scorer: nil, players: nil)
     @grid = grid
     @scorer = scorer
     @players = players
@@ -10,7 +7,7 @@ class GameManager
   end
 
   def play
-    @players[0].make_move
+    @players[0].make_move(@grid)
   end
 
   def grid
