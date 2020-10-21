@@ -1,10 +1,10 @@
-require 'game_manager'
-require 'stringio'
+require 'open3'
 
 RSpec.describe 'the command line user interface' do
   context 'when the user starts the game from the command line' do
     it 'displays a blank grid' do
-      allow(STDIN).to receive(:gets).and_return('0')
+      stdin, stdout = Open3.popen2('ruby tictactoe.rb')
+      stdin.puts('0') # User enters move in square 0
       blank_grid = <<~GRID
         +---+---+---+
         | 0 | 1 | 2 |
@@ -16,7 +16,7 @@ RSpec.describe 'the command line user interface' do
       GRID
 
       # Act & Assert
-      expect { system('ruby tictactoe.rb') }.to output(include(blank_grid)).to_stdout_from_any_process
+      expect(stdout.read).to include(blank_grid)
     end
   end
 end
