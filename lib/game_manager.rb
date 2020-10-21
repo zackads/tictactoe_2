@@ -1,10 +1,16 @@
 require 'grid'
+require 'scorer'
 
 class GameManager
-  def initialize(grid: Grid.new, scorer: Scorer.new)
+  def initialize(grid: Grid.new, scorer: Scorer.new, players: [])
     @grid = grid
     @scorer = scorer
+    @players = players
     @current_player = 'X'
+  end
+
+  def play
+    @players[0].make_move
   end
 
   def grid
@@ -17,7 +23,7 @@ class GameManager
   end
 
   def over?
-    @grid.full? || %w[X O].include?(winner) 
+    @grid.full? || %w[X O].include?(winner)
   end
 
   def winner

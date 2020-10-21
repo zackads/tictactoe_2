@@ -1,8 +1,29 @@
 require 'game_manager'
 
 RSpec.describe GameManager do
+  context 'when a new game is started' do
+    context 'and there are two players' do
+      it 'requests a move from the first player' do
+        # Arrange
+        player1 = spy('player_that_goes_first')
+        player2 = spy('player_that_goes_second')
+        game = GameManager.new(players: [player1, player2])
+
+        # Act
+        game.play
+
+        # Assert
+        expect(player1).to have_received(:make_move)
+      end
+    end
+  end
+end
+
+# ===================================================================================
+
+RSpec.describe 'old GameManager unit tests' do
   context 'when the grid is full' do
-    it 'the game is over' do
+    xit 'the game is over' do
       # Arrange
       grid = double('Grid', full?: true)
       scorer = double('Scorer', winner: nil, grid: grid)
