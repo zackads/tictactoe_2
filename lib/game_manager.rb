@@ -14,11 +14,6 @@ class GameManager
     @grid.raw
   end
 
-  def make_move(move)
-    @grid.record_move(@current_player, move)
-    change_current_player
-  end
-
   def over?
     @grid.full? || %w[X O].include?(winner)
   end
