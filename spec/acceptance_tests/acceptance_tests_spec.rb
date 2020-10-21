@@ -1,9 +1,10 @@
 require 'game_manager'
+require 'stringio'
 
-RSpec.describe GameManager do
+RSpec.describe 'the command line user interface' do
   context 'when the user starts the game from the command line' do
     it 'displays a blank grid' do
-      # Arrange
+      allow(STDIN).to receive(:gets).and_return('0')
       blank_grid = <<~GRID
         +---+---+---+
         | 0 | 1 | 2 |
@@ -15,10 +16,14 @@ RSpec.describe GameManager do
       GRID
 
       # Act & Assert
-      expect { system('ruby tictactoe.rb') }.to output(include(blank_grid)).to_stdout
+      expect { system('ruby tictactoe.rb') }.to output(include(blank_grid)).to_stdout_from_any_process
     end
   end
+end
 
+# ===================================================================================
+
+RSpec.describe 'old design acceptance tests' do
   context 'when the user creates a new game by instantiating the GameManager class' do
     xit 'creates a blank grid' do
       # Arrange
