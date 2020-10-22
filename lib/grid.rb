@@ -20,7 +20,7 @@ class Grid
   end
 
   def full?
-    !@grid.flatten.include?(nil)
+    @grid.none? { |square| square.is_a?(Integer) }
   end
 
   def empty_squares

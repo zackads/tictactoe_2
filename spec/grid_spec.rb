@@ -34,35 +34,52 @@ RSpec.describe Grid do
   end
 
   context 'when an invalid move is added' do
-    xit 'raises an argument exception' do
-      # Act
-      @grid.record_move('X', 0)
+    it 'raises an argument exception' do
+      # Arrange
+      grid = Grid.new
+      grid.record_move('X', 0)
 
-      # Assert
-      expect { @grid.record_move('X', 0) }.to raise_error(ArgumentError) # Duplicate move
-      expect { @grid.record_move('X', 9) }.to raise_error(ArgumentError) # Off-grid square
-      expect { @grid.record_move('X', 'XYZ') }.to raise_error(ArgumentError) # Not a square
+      # Act & Assert
+      expect { grid.record_move('X', 0) }.to raise_error(ArgumentError) # Duplicate move
+      expect { grid.record_move('X', 9) }.to raise_error(ArgumentError) # Off-grid square
+      expect { grid.record_move('X', 'XYZ') }.to raise_error(ArgumentError) # Not a square
     end
   end
 
   context 'when the grid is full' do
-    xit 'declares that the grid is full' do
+    it 'declares that the grid is full' do
       # Arrange
-      @grid.record_move('X', 6) # X
-      @grid.record_move('O', 7) # O
-      @grid.record_move('X', 8) # X
-      @grid.record_move('O', 3) # O
-      @grid.record_move('X', 4) # X
-      @grid.record_move('O', 5) # O
-      @grid.record_move('X', 0) # X
-      @grid.record_move('O', 1) # O
-      @grid.record_move('X', 2) # X
+      grid = Grid.new
+      grid.record_move('X', 6) # X
+      grid.record_move('O', 7) # O
+      grid.record_move('X', 8) # X
+      grid.record_move('O', 3) # O
+      grid.record_move('X', 4) # X
+      grid.record_move('O', 5) # O
+      grid.record_move('X', 0) # X
+      grid.record_move('O', 1) # O
+      grid.record_move('X', 2) # X
 
       # Act
-      is_grid_full = @grid.full?
+      grid_is_full = grid.full?
 
       # Assert
-      expect(is_grid_full).to eq(true)
+      expect(grid_is_full).to eq(true)
+    end
+  end
+
+  context 'when grid is not full' do
+    it 'does not declare the grid is full' do
+      # Arrange
+      grid = Grid.new
+      grid.record_move('X', 6) # X
+      grid.record_move('O', 7) # O
+
+      # Act
+      grid_is_full = grid.full?
+
+      # Assert
+      expect(grid_is_full).to eq(false)
     end
   end
 
