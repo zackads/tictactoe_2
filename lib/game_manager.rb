@@ -10,8 +10,7 @@ class GameManager
 
   def play
     loop do
-      over? ? declare : @players[0].make_move(@grid)
-      over? ? declare : @players[1].make_move(@grid)
+      @players.each { |player| over? ? declare : player.make_move(@grid) }
     end
   end
 

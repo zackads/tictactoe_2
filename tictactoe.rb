@@ -11,9 +11,10 @@ grid = Grid.new
 scorer = Scorer.new
 human_player = Player.new('X', CLIStrategy.new)
 ai_player = Player.new('O', DumbAIStrategy.new)
+another_human_player = Player.new('Y', CLIStrategy.new)
 
 game = GameManager.new(
-  players: [human_player, ai_player],
+  players: [human_player, ai_player, another_human_player],
   grid: grid,
   scorer: scorer
 )
