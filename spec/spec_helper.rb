@@ -17,3 +17,7 @@ def be_included_in(first_value, *rest)
     matcher.or eq(value)
   end
 end
+
+def string_contains_one_of_words(string, words)
+  words.any? { |word| string.include?(word) }
+end
