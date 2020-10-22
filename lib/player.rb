@@ -12,4 +12,10 @@ class Player
   rescue ArgumentError
     @strategy.invalid_move(grid)
   end
+
+  def handle_outcome(outcome)
+    @strategy.you_won if outcome.winner == self
+    @strategy.you_lost if outcome.winner != self
+    @strategy.draw if outcome.winner.nil?
+  end
 end

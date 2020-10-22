@@ -9,6 +9,7 @@ RSpec.describe Player do
 
       # Assert
       expect(player).to respond_to(:make_move).with(1).argument
+      expect(player).to respond_to(:handle_outcome).with(1).argument
     end
 
     it 'recalls its token' do
@@ -70,6 +71,52 @@ RSpec.describe Player do
 
       # Assert
       expect(move_strategy).to have_received(:invalid_move).with(grid)
+    end
+  end
+
+  context 'when player under test won' do
+    it 'tells its strategy' do
+      # Arrange
+      move_strategy = spy('cli')
+      player = Player.new('X', move_strategy)
+      outcome = double('outcome', winner: player)
+
+      # Act
+      player.handle_outcome(outcome)
+
+      # Assert
+      expect(move_strategy).to have_received(:you_won)
+    end
+  end
+
+  context 'when the game is over with no winner' do
+    it 'tells its strategy' do
+      # Arrange
+      move_strategy = spy('cli')
+      player = Player.new('X', move_strategy)
+      outcome = double('outcome', winner: nil)
+
+      # Act
+      player.handle_outcome(outcome)
+
+      # Assert
+      expect(move_strategy).to have_received(:draw)
+    end
+  end
+
+  context 'when the game is over and another player has won' do
+    it 'tells its strategy' do
+      # Arrange
+      move_strategy = spy('cli')
+      player = Player.new('X', move_strategy)
+      another_player = double('another_player')
+      outcome = double('outcome', winner: another_player)
+
+      # Act
+      player.handle_outcome(outcome)
+
+      # Assert
+      expect(move_strategy).to have_received(:you_lost)
     end
   end
 end
