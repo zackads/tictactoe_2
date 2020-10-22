@@ -1,24 +1,37 @@
+require_relative('outcome')
+
 class GameManager
   def initialize(grid: nil, scorer: nil, players: nil)
     @grid = grid
     @scorer = scorer
     @players = players
+    @outcome = Outcome.new
   end
 
   def play
     loop do
-      over? ? break : @players[0].make_move(@grid)
-      over? ? break : @players[1].make_move(@grid)
+      over? ? declare : @players[0].make_move(@grid)
+      over? ? declare : @players[1].make_move(@grid)
     end
   end
 
   private
 
-  def over?
-    @grid.full? || @players.include?(winner)
+  def declare
+    @outcome.winning_token = winning_token
+    @players.each { |player| player.handle_outcome(@outcome) }
+    exit
   end
 
-  def winner
-    @scorer.winner(@grid) # method injection
+  def over?
+    @grid.full? || winner?
+  end
+
+  def winner?
+    winning_token.is_a?(String)
+  end
+
+  def winning_token
+    @scorer.winner(@grid)
   end
 end
