@@ -107,5 +107,35 @@ RSpec.describe CLIStrategy do
         expect(move).to eq(0)
       end
     end
+
+    context 'when informed it is the winner' do
+      it 'prints a winning message to the console' do
+        # Arrange
+        strategy = CLIStrategy.new
+
+        # Act & Assert
+        expect { strategy.you_won }.to output(include('win').or(include('winner').or(include('won')))).to_stdout
+      end
+    end
+
+    context 'when informed the game is a draw' do
+      it 'prints a draw message to the console' do
+        # Arrange
+        strategy = CLIStrategy.new
+
+        # Act & Assert
+        expect { strategy.draw }.to output(include('draw').or(include('drawn'))).to_stdout
+      end
+    end
+
+    context 'when informed another play won' do
+      it 'prints a lose message to the console' do
+        # Arrange
+        strategy = CLIStrategy.new
+
+        # Act & Assert
+        expect { strategy.you_lost }.to output(include('lost').or(include('lose'))).to_stdout
+      end
+    end
   end
 end

@@ -18,6 +18,18 @@ class CLIStrategy
     get_move(grid)
   end
 
+  def you_won
+    puts "Congratulations, you've won! 🎉 "
+  end
+
+  def you_lost
+    puts 'Aw crumbs! You lost 😞'
+  end
+
+  def draw
+    puts "It's a draw! You were evenly matched 😬"
+  end
+
   private
 
   def print_grid(grid)
