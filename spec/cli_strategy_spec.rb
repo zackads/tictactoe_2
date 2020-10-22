@@ -16,14 +16,13 @@ RSpec.describe CLIStrategy do
     it 'displays the grid to the command line' do
       # Arrange
       grid = double('grid', raw: [0, 1, 2, 3, 4, 5, 6, 7, 8], empty_squares: [0, 1, 2, 3, 4, 5, 6, 7, 8])
-      allow($stdin).to receive(:gets).and_return('0')
-
       strategy = CLIStrategy.new
+      allow(strategy).to receive(:gets).and_return('0')
       expected_output = <<~GRID
         +---+---+---+
         | 0 | 1 | 2 |
         +---+---+---+
-        | 3 | 4 | 5 |   
+        | 3 | 4 | 5 |
         +---+---+---+
         | 6 | 7 | 8 |
         +---+---+---+
@@ -31,19 +30,22 @@ RSpec.describe CLIStrategy do
 
       # Act + Assert
       expect { strategy.get_move(grid) }.to output(include(expected_output)).to_stdout
+
+      # Teardown
+      $stdin = STDIN
     end
 
     context 'when passed a partially filled grid' do
       it 'displays the grid to the command line' do
         # Arrange
-        allow($stdin).to receive(:gets).and_return('0')
         grid = double('grid', raw: ['X', 1, 2, 'X', 4, 5, 'O', 7, 8], empty_squares: [1, 2, 4, 5, 7, 8])
         strategy = CLIStrategy.new
+        allow(strategy).to receive(:gets).and_return('0')
         expected_output = <<~GRID
           +---+---+---+
           | X | 1 | 2 |
           +---+---+---+
-          | X | 4 | 5 |   
+          | X | 4 | 5 |
           +---+---+---+
           | O | 7 | 8 |
           +---+---+---+
@@ -51,18 +53,21 @@ RSpec.describe CLIStrategy do
 
         # Act + Assert
         expect { strategy.get_move(grid) }.to output(include(expected_output)).to_stdout
+
+        # Teardown
+        $stdin = STDIN
       end
 
       it 'displays the grid to the command line' do
         # Arrange
-        allow($stdin).to receive(:gets).and_return('0')
         grid = double('grid', raw: [0, 'X', 'O', 3, 4, 5, 6, 'X', 'O'], empty_squares: [0, 3, 4, 5, 6])
         strategy = CLIStrategy.new
+        allow(strategy).to receive(:gets).and_return('0')
         expected_output = <<~GRID
           +---+---+---+
           | 0 | X | O |
           +---+---+---+
-          | 3 | 4 | 5 |   
+          | 3 | 4 | 5 |
           +---+---+---+
           | 6 | X | O |
           +---+---+---+
@@ -74,22 +79,11 @@ RSpec.describe CLIStrategy do
     end
 
     context 'when passed any grid with at least one empty square' do
-      it 'requests the next move from the user' do
-        # Arrange
-        $stdin = spy('stdin', gets: '0')
-        strategy = CLIStrategy.new
-        grid = double('grid', raw: [0, 1, 2, 3, 4, 5, 6, 7, 8], empty_sqaures: [0, 1, 2, 3, 4, 5, 6, 7, 8])
-
-        # Act & Assert
-        expect_any_instance_of(Object).to receive(:gets)
-        strategy.get_move(grid)
-      end
-
       it 'converts user input into a valid grid square' do
         # Arrange
-        $stdin = spy('stdin', gets: '0')
         strategy = CLIStrategy.new
-        grid = double('grid', raw: [0, 1, 2, 3, 4, 5, 6, 7, 8], empty_sqaures: [0, 1, 2, 3, 4, 5, 6, 7, 8])
+        allow(strategy).to receive(:gets).and_return('0')
+        grid = double('grid', raw: [0, 1, 2, 3, 4, 5, 6, 7, 8], empty_squares: [0, 1, 2, 3, 4, 5, 6, 7, 8])
 
         # Act
         move = strategy.get_move(grid)
@@ -97,9 +91,6 @@ RSpec.describe CLIStrategy do
         # Assert
         expect(move).to eq(0)
       end
-    end
-
-    xit 'does not allow the user to enter an invalid move' do
     end
   end
 end
