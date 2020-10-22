@@ -40,23 +40,39 @@ RSpec.describe 'the command line user interface' do
       expect(output).to include(user_token)
     end
 
-    context 'when the opponent makes a move' do
-      it 'it displays that move on the grid' do
+    context 'after the user makes a move' do
+      it "it displays the opponent's move on the grid" do
         # Arrange
         user_move = 3
-        opponent_move = 7
         opponent_token = '| O |'
         shell_command = 'ruby tictactoe.rb'
 
         # Act
         stdin, stdout = Open3.popen2(shell_command)
         stdin.puts(user_move) # User enters move
-        stdin.puts(opponent_move) # Opponent enters move
         stdin.puts('q') # User ends game early
         output = stdout.read
 
         # Assert
         expect(output).to include(opponent_token)
+      end
+    end
+
+    context 'when the player attempts to make an off-grid move' do
+      it 'notifies the player' do
+        # Arrange
+        user_move = '10'
+        error_message = "Uh-oh! That's not a valid grid square.  Please try again."
+        shell_command = 'ruby tictactoe.rb'
+
+        # Act
+        stdin, stdout = Open3.popen2(shell_command)
+        stdin.puts(user_move)
+        stdin.puts('q')
+        output = stdout.read
+
+        # Assert
+        expect(output).to include(error_message)
       end
     end
   end
