@@ -95,6 +95,30 @@ RSpec.describe 'the command line user interface' do
         expect(output).to include(error_message)
       end
     end
+
+    context 'when the game is played' do
+      it 'eventually ends with a win, lose or draw' do
+        100.times do
+          # Arrange
+          winning_message = "Congratulations, you've won! 🎉 "
+          losing_message = 'Aw crumbs! The other player won 😞'
+          draw_message = "It's a draw! You were evenly matched 😬"
+          shell_command = 'ruby tictactoe.rb'
+
+          # Act
+          stdin, stdout = Open3.popen2(shell_command)
+          counter = 1
+
+          100.times do
+            stdin.puts(rand(0..8)) # User enters random moves until game is over
+          end
+          output = stdout.read
+
+          # Assert
+          expect(output).to include(winning_message || losing_message || draw_message)
+        end
+      end
+    end
   end
 end
 
