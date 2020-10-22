@@ -18,7 +18,7 @@ class GameManager
   end
 
   def over?
-    @grid.full? || %w[X O].include?(winner)
+    @grid.full? || @players.include?(winner)
   end
 
   def winner
