@@ -62,12 +62,32 @@ RSpec.describe 'the command line user interface' do
       it 'notifies the player' do
         # Arrange
         user_move = '10'
-        error_message = "Uh-oh! That's not a valid grid square.  Please try again."
+        error_message = "Uh-oh! That's not a valid move.  Please try again."
         shell_command = 'ruby tictactoe.rb'
 
         # Act
         stdin, stdout = Open3.popen2(shell_command)
         stdin.puts(user_move)
+        stdin.puts('q')
+        output = stdout.read
+
+        # Assert
+        expect(output).to include(error_message)
+      end
+    end
+
+    context 'when the player attempts to make a move on a square that already has a move' do
+      it 'notifies the player' do
+        # Arrange
+        user_move = '4'
+        duplicate_user_move = '4'
+        error_message = "Uh-oh! That's not a valid move.  Please try again."
+        shell_command = 'ruby tictactoe.rb'
+
+        # Act
+        stdin, stdout = Open3.popen2(shell_command)
+        stdin.puts(user_move)
+        stdin.puts(duplicate_user_move)
         stdin.puts('q')
         output = stdout.read
 

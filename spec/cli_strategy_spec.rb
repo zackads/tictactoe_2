@@ -92,5 +92,20 @@ RSpec.describe CLIStrategy do
         expect(move).to eq(0)
       end
     end
+
+    context 'when told the last move was invalid' do
+      it 'notifies and prompts the user for another move' do
+        # Arrange
+        strategy = CLIStrategy.new
+        allow(strategy).to receive(:gets).and_return('0')
+        grid = double('grid', raw: [0, 1, 2, 3, 4, 5, 6, 7, 8], empty_squares: [0, 1, 2, 3, 4, 5, 6, 7, 8])
+
+        # Act
+        move = strategy.invalid_move(grid)
+
+        # Assert
+        expect(move).to eq(0)
+      end
+    end
   end
 end

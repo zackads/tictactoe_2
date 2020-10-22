@@ -8,7 +8,8 @@ class Player
 
   def make_move(grid)
     move = @strategy.get_move(grid)
-
     grid.record_move(@token, move)
+  rescue ArgumentError
+    @strategy.invalid_move(grid)
   end
 end

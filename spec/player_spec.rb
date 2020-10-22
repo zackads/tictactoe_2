@@ -52,4 +52,24 @@ RSpec.describe Player do
       expect(grid).to have_received(:record_move).with('X', test_move)
     end
   end
+
+  context 'when the strategy object returns an invalid move' do
+    it 'requests a valid move from the strategy object' do
+      # Arrange
+      invalid_move = '13'
+      move_strategy = spy('cli', get_move: invalid_move)
+      allow(move_strategy).to receive(:invalid_move)
+
+      grid = double('grid')
+      allow(grid).to receive(:record_move).with('X', invalid_move).and_raise(ArgumentError)
+
+      player = Player.new('X', move_strategy)
+
+      # Act
+      player.make_move(grid)
+
+      # Assert
+      expect(move_strategy).to have_received(:invalid_move).with(grid)
+    end
+  end
 end

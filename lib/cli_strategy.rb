@@ -14,7 +14,7 @@ class CLIStrategy
   end
 
   def invalid_move(grid)
-    puts "Uh-oh! That's not a valid grid square.  Please try again."
+    puts "Uh-oh! That's not a valid move.  Please try again."
     get_move(grid)
   end
 
