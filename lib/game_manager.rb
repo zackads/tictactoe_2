@@ -3,7 +3,6 @@ class GameManager
     @grid = grid
     @scorer = scorer
     @players = players
-    @current_player = 'X'
   end
 
   def play
@@ -13,9 +12,7 @@ class GameManager
     end
   end
 
-  def grid
-    @grid.raw
-  end
+  private
 
   def over?
     @grid.full? || @players.include?(winner)
@@ -23,11 +20,5 @@ class GameManager
 
   def winner
     @scorer.winner(@grid) # method injection
-  end
-
-  private
-
-  def change_current_player
-    @current_player = @current_player == 'X' ? 'O' : 'X'
   end
 end
