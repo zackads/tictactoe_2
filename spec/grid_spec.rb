@@ -84,7 +84,7 @@ RSpec.describe Grid do
   end
 
   context 'when the grid is partially filled with moves' do
-    xit 'declares which squares are empty' do
+    it 'declares which squares are empty' do
       expectations = [
         { moves: [3, 4, 5, 6, 7, 8], empty_squares: [0, 1, 2] },
         { moves: [1, 2, 6, 4], empty_squares: [0, 3, 5, 7, 8] },
