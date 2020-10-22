@@ -13,7 +13,7 @@ class CLIStrategy
     puts "Make your next move: \n"
     user_input = gets.chomp
     if user_input == 'q'
-      abort 'Sorry to see you go!'
+      exit
     else
       move = user_input.to_i
       move
