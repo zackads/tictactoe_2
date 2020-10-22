@@ -96,50 +96,27 @@ RSpec.describe 'the command line user interface' do
       end
     end
 
-    context 'when the game is played' do
-      it 'eventually ends with a win, lose or draw' do
-        100.times do
+    context 'when the game is played to completion' do
+      it 'ends with a win, lose or draw' do
+        10.times do
           # Arrange
-          winning_message = "Congratulations, you've won! 🎉 "
-          losing_message = 'Aw crumbs! The other player won 😞'
-          draw_message = "It's a draw! You were evenly matched 😬"
+          ending_words = %w[win won winner loss lost lose draw drew drawn]
+
           shell_command = 'ruby tictactoe.rb'
 
           # Act
           stdin, stdout = Open3.popen2(shell_command)
-          counter = 1
 
           100.times do
-            stdin.puts(rand(0..8)) # User enters random moves until game is over
+            stdin.puts(rand(0..8)) # User enters random moves 100 times,
+            # after which we expect the game to have finished (accounting for double-entered moves)...
           end
           output = stdout.read
 
           # Assert
-          expect(output).to include(winning_message || losing_message || draw_message)
+          expect(output).to satisfy { |output| string_contains_one_of_words(output, ending_words) }
         end
       end
-    end
-  end
-end
-
-# ===================================================================================
-
-RSpec.describe 'old design acceptance tests' do
-  context 'when the user creates a new game by instantiating the GameManager class' do
-    xit 'declares a winner' do
-      # Arrange
-      game = GameManager.new
-
-      # Act
-      game.make_move(0) # X
-      game.make_move(4) # O
-      game.make_move(1) # X
-      game.make_move(8) # O
-      game.make_move(2) # X - winning move
-
-      # Assert
-      expect(game.over?).to eq(true)
-      expect(game.winner).to eq('X')
     end
   end
 end
