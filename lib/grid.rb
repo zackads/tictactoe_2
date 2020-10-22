@@ -15,8 +15,8 @@ class Grid
     @grid
   end
 
-  def record_move(token, coords)
-    set_cell(coords, token)
+  def record_move(token, square_number)
+    set_square(square_number, token)
   end
 
   def full?
@@ -30,23 +30,22 @@ class Grid
 
   private
 
-  def validate_coords(coords)
-    raise ArgumentError, 'Invalid move: cell out of range' unless coords < @grid.size
+  def validate_square(square_number)
+    raise ArgumentError, 'Invalid move: cell out of range' unless square_number < @grid.size
   end
 
-  def validate_move(coords)
-    validate_coords(coords)
-    raise ArgumentError, 'Invalid move: square already contains a piece' unless get_cell(coords).is_a? Integer
+  def validate_move(square_number)
+    validate_square(square_number)
+    raise ArgumentError, 'Invalid move: square already contains a piece' unless get_square(square_number).is_a? Integer
   end
 
-  def get_cell(coords)
-    @grid[coords]
+  def get_square(square_number)
+    @grid[square_number]
   end
 
-  def set_cell(coords, token)
-    # Command: "A3" -> sets contents of "A3" to marker, e.g. 'X' or 'O'
-    validate_move(coords)
+  def set_square(square_number, token)
+    validate_move(square_number)
 
-    @grid[coords] = token
+    @grid[square_number] = token
   end
 end
