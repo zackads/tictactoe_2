@@ -7,13 +7,50 @@ RSpec.describe GameManager do
         # Arrange
         player1 = spy('player_that_goes_first')
         player2 = spy('player_that_goes_second')
-        game = GameManager.new(players: [player1, player2])
+        grid = double('grid')
+        allow(grid).to receive(:full?).and_return(false, true)
+        scorer = double('scorer', winner: nil)
+        game = GameManager.new(players: [player1, player2], grid: grid, scorer: scorer)
 
         # Act
         game.play
 
         # Assert
         expect(player1).to have_received(:make_move)
+      end
+
+      it 'it requests a move from the second player' do
+        # Arrange
+        player1 = spy('player_that_goes_first')
+        player2 = spy('player_that_goes_second')
+        grid = double('grid', full?: false)
+        allow(grid).to receive(:full?).and_return(false, false, true)
+        scorer = double('scorer', winner: nil)
+        game = GameManager.new(players: [player1, player2], grid: grid, scorer: scorer)
+
+        # Act
+        game.play
+
+        # Assert
+        expect(player2).to have_received(:make_move)
+      end
+
+      it 'continues to request moves from players until the grid is full' do
+        # Arrange
+        player1 = spy('player_that_goes_first')
+        player2 = spy('player_that_goes_second')
+        grid = double('grid', full?: false)
+        scorer = double('scorer', winner: nil)
+        allow(grid).to receive(:full?).and_return(false, false, false, false, false, false, true)
+
+        game = GameManager.new(grid: grid, players: [player1, player2], scorer: scorer)
+
+        # Act
+        game.play
+
+        # Assert
+        expect(player1).to have_received(:make_move).exactly(3).times
+        expect(player2).to have_received(:make_move).exactly(3).times
       end
     end
   end
@@ -22,21 +59,6 @@ end
 # ===================================================================================
 
 RSpec.describe 'old GameManager unit tests' do
-  context 'when the grid is full' do
-    xit 'the game is over' do
-      # Arrange
-      grid = double('Grid', full?: true)
-      scorer = double('Scorer', winner: nil, grid: grid)
-      game = GameManager.new(grid: grid, scorer: scorer) # Positional argument
-
-      # Act
-      game_over = game.over?
-
-      # Assert
-      expect(game_over).to eq(true)
-    end
-  end
-
   context 'when the grid is not full but X is the winner' do
     it 'the game is over' do
       # Arrange

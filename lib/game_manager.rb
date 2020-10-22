@@ -7,8 +7,10 @@ class GameManager
   end
 
   def play
-    @players[0].make_move(@grid)
-    @players[0].make_move(@grid)
+    loop do
+      over? ? break : @players[0].make_move(@grid)
+      over? ? break : @players[1].make_move(@grid)
+    end
   end
 
   def grid
