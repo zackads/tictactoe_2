@@ -8,7 +8,6 @@ class CLIStrategy
       exit
     else
       move = user_input.to_i
-      p(move)
       move
     end
   end
