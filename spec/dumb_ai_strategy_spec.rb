@@ -8,6 +8,10 @@ RSpec.describe DumbAIStrategy do
 
       # Assert
       expect(strategy).to respond_to(:get_move).with(1).argument
+      expect(strategy).to respond_to(:invalid_move).with(1).argument
+      expect(strategy).to respond_to(:you_won)
+      expect(strategy).to respond_to(:you_lost)
+      expect(strategy).to respond_to(:draw)
     end
   end
 
