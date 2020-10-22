@@ -140,10 +140,13 @@ RSpec.describe GameManager do
           # Arrange
           player1 = spy('player_that_goes_first')
           player2 = spy('player_that_goes_second')
+
           grid = double('grid')
-          scorer = double('scorer')
           allow(grid).to receive(:full?).and_return(false, false, false, false, false, false, false, false, false, false, true)
+
+          scorer = double('scorer')
           allow(scorer).to receive(:winner).and_return(nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, player2)
+
           game = GameManager.new(grid: grid, players: [player1, player2], scorer: scorer)
 
           # Act
