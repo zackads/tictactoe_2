@@ -8,6 +8,7 @@ class GameManager
 
   def play
     @players[0].make_move(@grid)
+    @players[0].make_move(@grid)
   end
 
   def grid

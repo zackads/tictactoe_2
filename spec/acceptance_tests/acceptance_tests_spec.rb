@@ -3,20 +3,49 @@ require 'open3'
 RSpec.describe 'the command line user interface' do
   context 'when the user starts the game from the command line' do
     it 'displays a blank grid' do
-      stdin, stdout = Open3.popen2('ruby tictactoe.rb')
-      stdin.puts('0') # User enters move in square 0
+      # Arrange
       blank_grid = <<~GRID
         +---+---+---+
         | 0 | 1 | 2 |
         +---+---+---+
-        | 3 | 4 | 5 |   
+        | 3 | 4 | 5 |
         +---+---+---+
         | 6 | 7 | 8 |
         +---+---+---+
       GRID
+      shell_command = 'ruby tictactoe.rb'
 
-      # Act & Assert
-      expect(stdout.read).to include(blank_grid)
+      # Act
+      stdin, stdout = Open3.popen2(shell_command) # Run app from command line and pipe its inputs and outputs to new IO objects just for testing
+      output = stdout.read # Return everything that was printed to command line
+      stdin.puts('q') # Simulates user input (user ends game early by entering 'q')
+
+      # Assert
+      expect(output).to include(blank_grid)
+    end
+
+    it 'requests user input and displays it on the grid' do
+      # Arrange
+      user_move = 7
+      grid_with_one_move = <<~GRID
+        +---+---+---+
+        | 0 | 1 | 2 |
+        +---+---+---+
+        | 3 | 4 | 5 |
+        +---+---+---+
+        | 6 | X | 8 |
+        +---+---+---+
+      GRID
+      shell_command = 'ruby tictactoe.rb'
+
+      # Act
+      stdin, stdout = Open3.popen2(shell_command)
+      stdin.puts(user_move) # User enters move
+      stdin.puts('q') # User ends game early
+      output = stdout.read
+
+      # Assert
+      expect(output).to include(grid_with_one_move)
     end
   end
 end

@@ -4,13 +4,19 @@ class CLIStrategy
       +---+---+---+
       | #{grid.raw[0]} | #{grid.raw[1]} | #{grid.raw[2]} |
       +---+---+---+
-      | #{grid.raw[3]} | #{grid.raw[4]} | #{grid.raw[5]} |   
+      | #{grid.raw[3]} | #{grid.raw[4]} | #{grid.raw[5]} |
       +---+---+---+
       | #{grid.raw[6]} | #{grid.raw[7]} | #{grid.raw[8]} |
       +---+---+---+
     GRID
 
     puts "Make your next move: \n"
-    move = gets.to_i
+    user_input = gets.chomp
+    if user_input == 'q'
+      abort 'Sorry to see you go!'
+    else
+      move = user_input.to_i
+      move
+    end
   end
 end
