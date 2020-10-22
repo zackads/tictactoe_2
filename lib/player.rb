@@ -15,7 +15,10 @@ class Player
 
   def handle_outcome(outcome)
     @strategy.you_won if outcome.winning_token == token
-    @strategy.draw if outcome.winning_token.nil?
-    @strategy.you_lost if outcome.winning_token != token
+    if outcome.winning_token.nil?
+      @strategy.draw
+    else
+      @strategy.you_lost
+    end
   end
 end
