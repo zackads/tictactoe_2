@@ -96,9 +96,10 @@ RSpec.describe 'the command line user interface' do
       end
     end
 
+    # What do you think of this style of acceptance test?
     context 'when the game is played to completion' do
       it 'ends with a win, lose or draw' do
-        10.times do
+        100.times do # 100 tests, takes 50+ seconds...
           # Arrange
           ending_words = %w[win won winner loss lost lose draw drew drawn]
 
@@ -107,9 +108,8 @@ RSpec.describe 'the command line user interface' do
           # Act
           stdin, stdout = Open3.popen2(shell_command)
 
-          100.times do
-            stdin.puts(rand(0..8)) # User enters random moves 100 times,
-            # after which we expect the game to have finished (accounting for double-entered moves)...
+          100.times do # User enters random moves 100 times, after which we expect the game to have finished (accounting for double-entered moves)...
+            stdin.puts(rand(0..8))
           end
           output = stdout.read
 
