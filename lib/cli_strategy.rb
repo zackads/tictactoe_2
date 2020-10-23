@@ -1,8 +1,8 @@
 class CLIStrategy
-  def get_move(grid)
+  def get_move(grid, token)
     print_grid(grid)
 
-    puts "Make your next move: \n"
+    puts "#{token} - Make your next move: \n"
     user_input = gets.chomp
     if user_input == 'q'
       exit
@@ -12,21 +12,21 @@ class CLIStrategy
     end
   end
 
-  def invalid_move(grid)
-    puts "Uh-oh! That's not a valid move.  Please try again."
+  def invalid_move(grid, token)
+    puts "#{token} - Uh-oh! That's not a valid move.  Please try again."
     get_move(grid)
   end
 
-  def you_won
-    puts "Congratulations, you've won! 🎉 "
+  def you_won(token)
+    puts "#{token} - Congratulations, you've won! 🎉 "
   end
 
-  def you_lost
-    puts 'Aw crumbs! You lost 😞'
+  def you_lost(token)
+    puts "#{token} - Aw crumbs! You lost 😞"
   end
 
-  def draw
-    puts "It's a draw! You were evenly matched 😬"
+  def draw(token)
+    puts "#{token} - It's a draw! You were evenly matched 😬"
   end
 
   private

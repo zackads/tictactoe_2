@@ -7,18 +7,19 @@ class Player
   end
 
   def make_move(grid)
-    move = @strategy.get_move(grid)
+    move = @strategy.get_move(grid, @token)
     grid.record_move(@token, move)
   rescue ArgumentError
-    @strategy.invalid_move(grid)
+    @strategy.invalid_move(grid, @token)
   end
 
   def handle_outcome(outcome)
-    @strategy.you_won if outcome.winning_token == token
-    if outcome.winning_token.nil?
-      @strategy.draw
+    if outcome.winning_token == token
+      @strategy.you_won(@token)
+    elsif outcome.winning_token.nil?
+      @strategy.draw(@token)
     else
-      @strategy.you_lost
+      @strategy.you_lost(@token)
     end
   end
 end
